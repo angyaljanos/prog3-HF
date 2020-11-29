@@ -1,15 +1,10 @@
 package game.consumers;
 
-import java.util.HashMap;
-
 public class sellerMarket extends Consumer{
-    public sellerMarket(HashMap<String,Integer> prices){
+    public sellerMarket(){
         numberOfWorkers = 1;
-        this.prices = prices;
         coolDownMs = 3000;
-    }
-    public void sell(){
-        ///nincs kész
+        this.targetProduct = "";
     }
 
     @Override
@@ -18,13 +13,7 @@ public class sellerMarket extends Consumer{
     }
 
     @Override
-    public void run() {
-        try {
-            sell();
-            notifyAll();
-            Thread.sleep(coolDownMs);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public void run(){
+        super.run();
     }
 }

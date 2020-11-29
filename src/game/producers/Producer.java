@@ -12,12 +12,12 @@ public abstract class Producer implements Runnable {
 
     public void produce(String productName) throws InterruptedException {
         Integer currentQuantity = (Integer)Game.inventory.get(productName);
-        if(currentQuantity > 20)
+        if(currentQuantity > Game.capacityPerItem)
             Thread.currentThread().wait();
         else {
             int newQuantity = currentQuantity + 1 + (numberOfWorkers / 5);
-            if (newQuantity > 20)
-                newQuantity = 20 - currentQuantity;
+            if (newQuantity > Game.capacityPerItem)
+                newQuantity = Game.capacityPerItem;
 
             Game.inventory.put(productName, newQuantity);
         }

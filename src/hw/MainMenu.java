@@ -1,5 +1,7 @@
 package hw;
 
+import game.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -46,6 +48,7 @@ public class MainMenu {
         public void removeMenuComponents(MainFrame mainFrame){
             mainFrame.mainPanel.remove(menuPanel);
             mainFrame.mainPanel.setBackground(Color.white);//refreshing the main panel
+            nameInsertForm f = new nameInsertForm();
         }
     }
     public static class continueButtonListener implements ActionListener {
