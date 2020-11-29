@@ -9,19 +9,19 @@ public class sellerMarket extends Consumer{
         coolDownMs = 3000;
     }
     public void sell(){
-
+        ///nincs kész
     }
 
     @Override
     public void addWorker() {
-        numberOfWorkers++;
-        coolDownMs = (long)(3000/numberOfWorkers);
+        super.addWorker();
     }
 
     @Override
     public void run() {
         try {
             sell();
+            notifyAll();
             Thread.sleep(coolDownMs);
         } catch (InterruptedException e) {
             e.printStackTrace();

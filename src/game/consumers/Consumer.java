@@ -1,8 +1,5 @@
 package game.consumers;
 
-import game.PlayerData;
-
-import java.io.Serializable;
 import java.util.HashMap;
 
 public abstract class Consumer implements Runnable {
@@ -10,8 +7,13 @@ public abstract class Consumer implements Runnable {
     protected long coolDownMs;
     protected HashMap<String,Integer> prices;
 
-    public void addWorker(){
 
+    public void addWorker(){
+        numberOfWorkers++;
+        coolDownMs = 3000/numberOfWorkers;
     }
 
+    public void sell(String productName){
+
+    }
 }

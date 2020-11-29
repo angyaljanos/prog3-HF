@@ -1,5 +1,25 @@
 package game.producers;
 
+import game.Game;
+
 public abstract class Producer implements Runnable {
-    private int level;
+    protected int numberOfWorkers;
+    protected long coolDownMs;
+    public void addWorker(){
+        numberOfWorkers++;
+        coolDownMs = 3000/numberOfWorkers;
+    }
+
+    public void produce(String productName) throws InterruptedException {
+        Integer currentQuantity = (Integer)Game.inventory.get(productName);
+        if(currentQuantity > 20)
+            Thread.currentThread().wait();
+        else {
+            int newQuantity = currentQuantity + 1 + (numberOfWorkers / 5);
+            if (newQuantity > 20)
+                newQuantity = 20 - currentQuantity;
+
+            Game.inventory.put(productName, newQuantity);
+        }
+    }
 }
