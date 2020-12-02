@@ -1,25 +1,31 @@
 package game.producers;
 
-import game.Game;
+import game.Player;
+import game.baseBuilding;
 
-public abstract class Producer implements Runnable {
-    protected int numberOfWorkers;
-    protected long coolDownMs;
+import java.io.IOException;
+
+public abstract class Producer extends baseBuilding implements Runnable {
+
+    public Producer(String path) throws IOException {
+        super(path);
+    }
+
     public void addWorker(){
         numberOfWorkers++;
         coolDownMs = 3000/numberOfWorkers;
     }
 
     public void produce(String productName) throws InterruptedException {
-        Integer currentQuantity = (Integer)Game.inventory.get(productName);
-        if(currentQuantity > Game.capacityPerItem)
+        Integer currentQuantity = (Integer) Player.inventory.get(productName);
+        if(currentQuantity > Player.capacityPerItem)
             Thread.currentThread().wait();
         else {
             int newQuantity = currentQuantity + 1 + (numberOfWorkers / 5);
-            if (newQuantity > Game.capacityPerItem)
-                newQuantity = Game.capacityPerItem;
+            if (newQuantity > Player.capacityPerItem)
+                newQuantity = Player.capacityPerItem;
 
-            Game.inventory.put(productName, newQuantity);
+            Player.inventory.put(productName, newQuantity);
         }
     }
 }

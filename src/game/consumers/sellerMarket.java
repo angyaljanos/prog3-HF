@@ -1,7 +1,10 @@
 package game.consumers;
 
+import java.io.IOException;
+
 public class sellerMarket extends Consumer{
-    public sellerMarket(){
+    public sellerMarket() throws IOException {
+        super("../../resources/market.jpg");
         numberOfWorkers = 1;
         coolDownMs = 3000;
         this.targetProduct = "";

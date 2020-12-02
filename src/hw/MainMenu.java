@@ -8,14 +8,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainMenu {
-
     private static final JPanel menuPanel = new JPanel();
     private static final JLabel title = new JLabel("Welcome to Profucer-Cunsumer Game");
     private static final JButton continueButton = new JButton("Continue");
     private static final JButton newGameButton = new JButton("New Game");
     private static final JButton quitButton = new JButton("Exit");
-
     private GroupLayout layout;
+
+    public Game game;
 
     public MainMenu(MainFrame mainFrame){
         layout = new GroupLayout(mainFrame);
@@ -33,9 +33,11 @@ public class MainMenu {
         menuPanel.add(quitButton);
 
         mainFrame.mainPanel.add(menuPanel);
+
+        game = new Game(mainFrame);
     }
 
-    public static class newGameButtonListener implements ActionListener {
+    public class newGameButtonListener implements ActionListener {
         MainFrame mainFrame;
 
         public newGameButtonListener(MainFrame mainFrame){
@@ -44,14 +46,14 @@ public class MainMenu {
         @Override
         public void actionPerformed(ActionEvent e) {
             removeMenuComponents(mainFrame);
+            game.newGame(mainFrame);
         }
         public void removeMenuComponents(MainFrame mainFrame){
             mainFrame.mainPanel.remove(menuPanel);
             mainFrame.mainPanel.setBackground(Color.white);//refreshing the main panel
-            nameInsertForm f = new nameInsertForm();
         }
     }
-    public static class continueButtonListener implements ActionListener {
+    public class continueButtonListener implements ActionListener {
         MainFrame mainFrame;
 
         public continueButtonListener(MainFrame mainFrame){
@@ -66,7 +68,7 @@ public class MainMenu {
             mainFrame.mainPanel.setBackground(Color.white);
         }
     }
-    public static class exitButtonListener implements ActionListener {
+    public class exitButtonListener implements ActionListener {
         MainFrame frame;
 
         public exitButtonListener(MainFrame frame){
@@ -74,8 +76,8 @@ public class MainMenu {
         }
         @Override
         public void actionPerformed(ActionEvent e) {
+            System.out.println("Hello viitnám");
             frame.dispose();
         }
-
     }
 }

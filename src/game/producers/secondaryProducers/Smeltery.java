@@ -2,15 +2,15 @@ package game.producers.secondaryProducers;
 
 import java.io.IOException;
 
-public class Tanner extends secondaryProducer {
-    public Tanner(String path) throws IOException {
-        super("../../resources/tanner.jpg");
+public class Smeltery  extends secondaryProducer {
+    public Smeltery() throws IOException {
+        super("../../resources/smeltery.jpg");
     }
 
     @Override
     public void run() {
         try {
-            super.produce("Leather","Leather Clothing");
+            super.produce("Iron Ore","Iron Ingot");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

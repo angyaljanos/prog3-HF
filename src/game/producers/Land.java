@@ -1,6 +1,12 @@
 package game.producers;
 
+import java.io.IOException;
+
 public class Land extends Producer{
+    public Land() throws IOException {
+        super("../../resources/land.jpg");
+    }
+
     @Override
     public void run() {
         try {

@@ -1,11 +1,18 @@
 package game.consumers;
 
 import game.Game;
+import game.Player;
+import game.baseBuilding;
 
-public abstract class Consumer implements Runnable {
-    protected int numberOfWorkers;
-    protected long coolDownMs;
+import java.io.IOException;
+
+public abstract class Consumer extends baseBuilding implements Runnable {
+
     protected String targetProduct = "";
+
+    public Consumer(String path) throws IOException {
+        super(path);
+    }
 
     public void setTargetProduct(String targetProduct) {
         this.targetProduct = targetProduct;
@@ -27,10 +34,13 @@ public abstract class Consumer implements Runnable {
     }
 
     protected void sell() throws InterruptedException {
-        Integer currentQuantity = Game.inventory.get(targetProduct);
-        if(currentQuantity > 0)
-            Game.inventory.put(targetProduct,currentQuantity - 1);
-        else
+        Integer currentQuantity = Player.inventory.get(targetProduct);
+        Integer newQuantity = currentQuantity - 1 - (numberOfWorkers/5);
+        if(currentQuantity <= 0)
             Thread.currentThread().wait();
+        else {
+            Player.inventory.put(targetProduct, newQuantity > 0 ? newQuantity : 0);
+            Player.gold += newQuantity * Game.prices.get(targetProduct);
+        }
     }
 }
