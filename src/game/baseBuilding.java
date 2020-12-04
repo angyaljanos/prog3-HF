@@ -7,29 +7,31 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
-public class baseBuilding extends JPanel {
+public class baseBuilding extends JPanel implements Runnable{
     protected BufferedImage image;
     protected String buildingName = "Field";
     protected int numberOfWorkers;
     protected long coolDownMs;
     protected long cost;
+    protected Player owner;
 
-    public baseBuilding(String path) throws IOException {
-        image = ImageIO.read(new File(path));
+    public baseBuilding(String path, Player player) throws IOException {
+        image = ImageIO.read(Objects.requireNonNull(baseBuilding.class.getClassLoader().getResourceAsStream(path)));
+        owner = player;
 
-        otherSettings();
+        settings();
     }
-    public baseBuilding() throws IOException {
+    public baseBuilding(Player player) throws IOException {
         image = ImageIO.read(Objects.requireNonNull(baseBuilding.class.getClassLoader().getResourceAsStream("blank.png")));
+        owner = player;
 
-        otherSettings();
+        settings();
     }
 
-    private void otherSettings(){
+    private void settings(){
         setPreferredSize(new Dimension(180,180));
         setBorder(new LineBorder(Color.black));
         setBackground(Color.lightGray);
@@ -52,13 +54,19 @@ public class baseBuilding extends JPanel {
     }
 
     protected void addWorker(){
-        if(Player.gold >= cost) {
+        if(owner.getGold() >= cost) {
             numberOfWorkers++;
             coolDownMs = 3000 / numberOfWorkers;
 
-            Player.gold -= cost;
+            owner.decraseGold(cost);
             cost *= 2;
         }
+    }
+
+    private baseBuilding getBuilding(){return this;}
+
+    public Player getOwner() {
+        return owner;
     }
 
     @Override
@@ -67,16 +75,25 @@ public class baseBuilding extends JPanel {
         g.drawImage(image, 0, 0, this);
     }
 
-    private static class propertyWindowOnHover implements MouseListener {
+    @Override
+    public void run() {
+
+    }
+
+    private class propertyWindowOnHover implements MouseListener {
         buildingPropertyWindow propertyWindow;
 
         public propertyWindowOnHover(baseBuilding building){
             propertyWindow = new buildingPropertyWindow(building);
         }
-        //unused methods
+
         @Override
         public void mouseClicked(MouseEvent mouseEvent) {
-
+            try {
+                new buildingShopFrame(getBuilding());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         @Override

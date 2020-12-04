@@ -1,13 +1,14 @@
 package game.consumers;
 
+import game.Game;
 import game.Player;
 
 import java.io.IOException;
 import java.util.HashMap;
 
 public class sellerMarket extends Consumer{
-    public sellerMarket() throws IOException {
-        super("../../resources/market.jpg");
+    public sellerMarket(Player player) throws IOException {
+        super("../../resources/market.jpg", player);
         buildingName = "Seller Market Lv." + numberOfWorkers;
         numberOfWorkers = 1;
         coolDownMs = 3000;

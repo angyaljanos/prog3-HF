@@ -1,49 +1,49 @@
 package game;
 
 import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 import hw.MainFrame;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Game {
     public static HashMap prices = new HashMap<String,Integer>();
-    private static ingameMenuSlide menuSlide;
     private static JPanel container;
     private static baseBuilding[] gamefields = new baseBuilding[16];;
-    private static Player player;
+
     private static GridLayout grid = new GridLayout(4,4);
+
+    private Player player;
+    private ingameMenuSlide menuSlide;
 
     public Game(MainFrame mainFrame) throws FileNotFoundException {
         container = new JPanel();
         player = new Player();
-        menuSlide = new ingameMenuSlide(mainFrame,player,prices);
+        menuSlide = new ingameMenuSlide(mainFrame,player,this);
 
         setPrices();
     }
 
-    private static void initTiles() throws IOException {
+    private void initTiles() throws IOException {
         container.setLayout(grid);
         menuSlide.setVisible(true);
         for(baseBuilding item: gamefields){
-            item = new baseBuilding();
+            item = new baseBuilding(player);
             container.add(item);
         }
         MainFrame.mainPanel.add(container);
         //container.getComponentAt()
     }
 
-    public static void newGame(Player player){
+    public void newGame(){
         try {
-            Player.gold = 0;
-
+            player.setGold(2);
             initTiles();
         }
         catch(IOException e){
@@ -51,7 +51,7 @@ public class Game {
         }
     }
 
-    public static void continuePreviousGame(MainFrame mainFrame){
+    public void continuePreviousGame(MainFrame mainFrame){
         try {
             initTiles();
         }
@@ -62,12 +62,18 @@ public class Game {
 
     public  void setPrices() throws FileNotFoundException {
         prices.clear();
-        Gson gson = new Gson();
-        //prices = gson.fromJson(new FileReader("..\\resources\\prices.json"),prices.getClass());
+        Gson gson =  new Gson();
+        prices = gson.fromJson( new FileReader(new File("").getAbsolutePath().concat("/resources/prices.json")), prices.getClass());
+        System.out.println("prices.size:" + prices.keySet().size());
     }
 
-    public static void save(){
+
+    public void save() throws IOException {
         Gson gson = new Gson();
+        FileWriter fileWriter = new FileWriter(new File("").getAbsolutePath().concat("/resources/game.json"));
+        gson.toJson(player, fileWriter);
+
+        fileWriter.close();
     }
 
 
@@ -75,7 +81,7 @@ public class Game {
         buildingShopFrame buildingShopFrame;
 
         private buyBuildingListener() throws IOException {
-            buildingShopFrame = new buildingShopFrame();
+            buildingShopFrame = new buildingShopFrame((baseBuilding)container.getComponentAt(MouseInfo.getPointerInfo().getLocation()));
         }
 
         @Override

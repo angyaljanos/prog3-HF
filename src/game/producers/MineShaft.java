@@ -5,8 +5,8 @@ import game.Player;
 import java.io.IOException;
 
 public class MineShaft extends Producer{
-    public MineShaft() throws IOException {
-        super("../../resources/mineshaft.jpg");
+    public MineShaft(Player player) throws IOException {
+        super("mineshaft.jpg", player);
         buildingName = "MineShaft";
     }
 

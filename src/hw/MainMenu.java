@@ -9,18 +9,22 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 
 public class MainMenu {
-    private static final JPanel menuPanel = new JPanel();
-    private static final JLabel title = new JLabel("Welcome to Profucer-Cunsumer Game");
-    private static final JButton continueButton = new JButton("Continue");
-    private static final JButton newGameButton = new JButton("New Game");
-    private static final JButton quitButton = new JButton("Exit");
-    private GroupLayout layout;
+    private JPanel menuPanel = new JPanel();
+    private JLabel title = new JLabel("Welcome to Profucer-Cunsumer Game");
+    private JButton continueButton = new JButton("Continue");
+    private JButton newGameButton = new JButton("New Game");
+    private JButton quitButton = new JButton("Exit");
+    private BoxLayout layout;
 
-    public Game game;
+    private Game game;
 
     public MainMenu(MainFrame mainFrame) throws FileNotFoundException {
-        layout = new GroupLayout(mainFrame);
-        layout.setAutoCreateGaps(true);
+        initComponents(mainFrame);
+        game = new Game(mainFrame);
+    }
+
+    public void initComponents(MainFrame mainFrame){
+        layout = new BoxLayout(menuPanel,BoxLayout.Y_AXIS);
 
         menuPanel.setBackground(Color.CYAN);
 
@@ -29,16 +33,34 @@ public class MainMenu {
         quitButton.addActionListener(new exitButtonListener(mainFrame));
 
         menuPanel.add(title);
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        title.setFont(new Font("Arial",Font.BOLD,30));
+
+        menuPanel.add(Box.createRigidArea(new Dimension(0,20)));
         menuPanel.add(newGameButton);
+        newGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        newGameButton.setFont(new Font("Arial",Font.BOLD,30));
+
+        menuPanel.add(Box.createRigidArea(new Dimension(0,20)));
         menuPanel.add(continueButton);
+        continueButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        continueButton.setFont(new Font("Arial",Font.BOLD,30));
+
+        menuPanel.add(Box.createRigidArea(new Dimension(0,20)));
         menuPanel.add(quitButton);
+        quitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        quitButton.setFont(new Font("Arial",Font.BOLD,30));
 
+        menuPanel.setLayout(layout);
         MainFrame.mainPanel.add(menuPanel);
-
-        game = new Game(mainFrame);
     }
 
-    public class newGameButtonListener implements ActionListener {
+    public void removeMenuComponents(MainFrame mainFrame){
+        mainFrame.mainPanel.remove(menuPanel);
+        mainFrame.mainPanel.setBackground(Color.white);//refreshing the main panel
+    }
+
+    private class newGameButtonListener implements ActionListener {
         private MainFrame mainFrame;
         private Player player;
         public newGameButtonListener(Player player){
@@ -51,14 +73,11 @@ public class MainMenu {
         @Override
         public void actionPerformed(ActionEvent e) {
             removeMenuComponents(mainFrame);
-            game.newGame(player);
+            game.newGame();
         }
-        public void removeMenuComponents(MainFrame mainFrame){
-            mainFrame.mainPanel.remove(menuPanel);
-            mainFrame.mainPanel.setBackground(Color.white);//refreshing the main panel
-        }
+
     }
-    public class continueButtonListener implements ActionListener {
+    private class continueButtonListener implements ActionListener {
         MainFrame mainFrame;
 
         public continueButtonListener(MainFrame mainFrame){
@@ -66,14 +85,11 @@ public class MainMenu {
         }
         @Override
         public void actionPerformed(ActionEvent e) {
+            game.continuePreviousGame(mainFrame);
             removeMenuComponents(mainFrame);
         }
-        public void removeMenuComponents(MainFrame mainFrame){
-            mainFrame.mainPanel.remove(menuPanel);
-            mainFrame.mainPanel.setBackground(Color.white);
-        }
     }
-    public class exitButtonListener implements ActionListener {
+    private class exitButtonListener implements ActionListener {
         MainFrame frame;
 
         public exitButtonListener(MainFrame frame){
@@ -81,7 +97,7 @@ public class MainMenu {
         }
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Hello viitnám");
+            System.out.println("Hello vIITnám");
             frame.dispose();
         }
     }

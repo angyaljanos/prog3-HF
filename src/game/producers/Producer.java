@@ -8,15 +8,18 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 
-public abstract class Producer extends baseBuilding implements Runnable {
+public abstract class Producer extends baseBuilding {
 
-    public Producer(String path) throws IOException {
-        super(path);
+    public Producer(String path, Player player) throws IOException {
+        super(path, player);
         addMouseListener(new mouseHandler(this));
     }
 
     public void produce(String productName) throws InterruptedException {
-        Integer currentQuantity = (Integer) Player.inventory.get(productName);
+        if(owner.inventory.isEmpty()){
+            return;
+        }
+        Integer currentQuantity = (Integer) owner.getInventory().get(productName);
         if(currentQuantity > Player.capacityPerItem)
             Thread.currentThread().wait();
         else {
@@ -24,7 +27,7 @@ public abstract class Producer extends baseBuilding implements Runnable {
             if (newQuantity > Player.capacityPerItem)
                 newQuantity = Player.capacityPerItem;
 
-            Player.inventory.put(productName, newQuantity);
+            owner.getInventory().put(productName, newQuantity);
         }
     }
     public String getBuildingName(){

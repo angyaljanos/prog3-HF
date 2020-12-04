@@ -5,8 +5,8 @@ import game.Player;
 import java.io.IOException;
 
 public class Oven extends secondaryProducer {
-    public Oven() throws IOException {
-        super("../../resources/oven.jpg");
+    public Oven(Player player) throws IOException {
+        super("oven.jpg", player);
         buildingName = "Oven";
     }
 

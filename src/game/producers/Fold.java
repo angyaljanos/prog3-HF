@@ -5,8 +5,8 @@ import game.Player;
 import java.io.IOException;
 
 public class Fold extends Producer{
-    public Fold() throws IOException {
-        super("../../resources/fold.jpg");
+    public Fold(Player player) throws IOException {
+        super("fold.jpg", player);
         buildingName = "Fold";
     }
 

@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class buildingShopFrame extends JFrame {
@@ -19,96 +20,111 @@ public class buildingShopFrame extends JFrame {
 
     private GridLayout grid = new GridLayout(0,2);
 
-    public buildingShopFrame() throws IOException {
+    private String choosedBuildingName = "None";
+    private baseBuilding newBuilding;
+    private Player owner;
+
+    public buildingShopFrame(baseBuilding base) throws IOException {
+        super("Building Shop");
+        newBuilding = base;
+        owner = base.getOwner();
         getBuildingPrices();
+        container.setLayout(grid);
         scrollPane = new JScrollPane(container);
-        setSize(new Dimension(150,100));
+
+        setSize(new Dimension(250,100));
 
         add(scrollPane);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocation(MouseInfo.getPointerInfo().getLocation());
+        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        setResizable(false);
         setVisible(true);
     }
 
     private void getBuildingPrices() throws IOException {
-        Scanner sc = new Scanner("buildPrices.txt");
+        Scanner sc = new Scanner(Objects.requireNonNull(baseBuilding.class.getClassLoader().getResourceAsStream("buildingPrices.txt")));
         while (sc.hasNext()){
             String[] line = sc.nextLine().split(":");
 
             for(int i = 0; i < line.length; i++){
                 labels = new JLabel(line[0]);
                 buyButton = new JButton(line[1]);
-
-                container.add(labels);
-                container.add(buyButton);
             }
+            buyButton.addActionListener(new getBuildingNameListener(line[0],Long.parseLong(line[1])));
+            container.add(labels);
+            container.add(buyButton);
         }
 
         sc.close();
     }
 
-    public baseBuilding addNew(String name) throws IOException {
-        baseBuilding temp;
-        switch (name){
+    public void addNew() throws IOException {
+
+        switch (choosedBuildingName){
             case "Woods":
-                temp = new Woods();
+                newBuilding = new Woods(newBuilding.owner);
                 break;
             case "Quarry":
-                temp = new Quarry();
+                newBuilding = new Quarry(newBuilding.owner);
                 break;
             case "Fold":
-                temp = new Fold();
+                newBuilding = new Fold(newBuilding.owner);
                 break;
             case "Land":
-                temp = new Land();
+                newBuilding = new Land(newBuilding.owner);
                 break;
             case "Mine Shaft":
-                temp = new MineShaft();
+                newBuilding = new MineShaft(newBuilding.owner);
                 break;
             case "Seller Market":
-                temp = new sellerMarket();
+                newBuilding = new sellerMarket(newBuilding.owner);
                 break;
             case "Saw Mill":
-                temp = new Sawmill();
+                newBuilding = new Sawmill(newBuilding.owner);
                 break;
             case "Stone Cutter":
-                temp = new StoneCutter();
+                newBuilding = new StoneCutter(newBuilding.owner);
                 break;
             case "Bakery":
-                temp = new Bakery();
+                newBuilding = new Bakery(newBuilding.owner);
                 break;
             case "Oven":
-                temp = new Oven();
+                newBuilding = new Oven(newBuilding.owner);
                 break;
             case "Smeltery":
-                temp = new Smeltery();
+                newBuilding = new Smeltery(newBuilding.owner);
                 break;
             case "Tanner":
-                temp = new Tanner();
+                newBuilding = new Tanner(newBuilding.owner);
                 break;
-            default:return null;
+            default:newBuilding = new baseBuilding(newBuilding.owner);
         }
-        return temp;
+        new Thread((Runnable)newBuilding).start();
     }
 
-    private class buyBuildingListener implements ActionListener{
-        Integer cost;
+    private class getBuildingNameListener implements ActionListener{
+        long buildCost;
         String bname;
-        public  buyBuildingListener(String buildingName, Integer costValue){
-            this.cost = costValue;
+        public  getBuildingNameListener(String buildingName,long cost){
             bname = buildingName;
+            buildCost = cost;
         }
 
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             try {
-                if(Player.gold >= cost) {
-                    Player.gold -= cost;
-                    addNew(bname);
+                if(owner.getGold() >= buildCost) {
+                    owner.decraseGold(buildCost);
+                    choosedBuildingName = bname;
+
+                    addNew();
                 }
-            }catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
+            }
+            finally {
+                dispose();
             }
         }
     }
-
 }

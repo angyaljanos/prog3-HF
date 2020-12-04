@@ -5,8 +5,8 @@ import game.Player;
 import java.io.IOException;
 
 public class Sawmill extends secondaryProducer {
-    public Sawmill() throws IOException {
-        super("../../resources/sawmill.jpg");
+    public Sawmill( Player player) throws IOException {
+        super("sawmill.jpg", player);
         buildingName = "Sawmill";
     }
 

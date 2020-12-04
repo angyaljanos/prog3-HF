@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.HashMap;
 
 public class ingameMenuSlide {
@@ -21,9 +22,9 @@ public class ingameMenuSlide {
     private JMenuItem[] storageMenuItems = new JMenuItem[storageFunctions.length];
     private JMenuItem[] gameMenuItems = new JMenuItem[gameFunctions.length];
 
-    public ingameMenuSlide(MainFrame mainFrame,Player player,HashMap<String,Integer> priceList){
-        initializeGameMenu(player,priceList);
-        initializeStorageMenu(player);
+    public ingameMenuSlide(MainFrame mainFrame,Player player,Game game){
+        initializeGameMenu(player,Game.prices);
+        initializeStorageMenu(player, game);
         initializeGoldMenu(player);
 
         menuBar.setVisible(false);
@@ -31,14 +32,14 @@ public class ingameMenuSlide {
         mainFrame.setJMenuBar(menuBar);
     }
 
-    public void initializeStorageMenu(Player player){
+    public void initializeStorageMenu(Player player,Game game){
         storageMenu.setText("Storage");
         for(int i = 0; i < storageFunctions.length; i++){
             storageMenuItems[i] = new JMenuItem(storageFunctions[i]);
             storageMenu.add(storageMenuItems[i]);
         }
-        storageMenuItems[0].addActionListener(new gameSaverListener());
-        storageMenuItems[1].addActionListener(new newGameListener(player));
+        storageMenuItems[0].addActionListener(new gameSaverListener(game));
+        storageMenuItems[1].addActionListener(new newGameListener(player,game));
         menuBar.add(storageMenu);
     }
 
@@ -55,7 +56,7 @@ public class ingameMenuSlide {
 
     public void initializeGoldMenu(Player player){
         goldMenu.setText("Gold");
-        goldMenu.addMouseListener(new hoverMouseListener());
+        goldMenu.addMouseListener(new hoverMouseListener(player));
         menuBar.add(goldMenu);
     }
 
@@ -64,20 +65,31 @@ public class ingameMenuSlide {
     }
 
     private class gameSaverListener implements ActionListener{
+        private Game game;
+
+        public gameSaverListener(Game game) {
+            this.game = game;
+        }
 
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            Game.save();
+            try {
+                game.save();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
     private class newGameListener implements ActionListener{
         private Player player;
-        public newGameListener(Player player){
+        private Game currentGame;
+        public newGameListener(Player player, Game game){
             this.player = player;
+            currentGame = game;
         }
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            Game.newGame(player);
+            currentGame.newGame();
         }
     }
 
@@ -88,7 +100,7 @@ public class ingameMenuSlide {
         }
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            listItemsWindow l = new listItemsWindow(Player.inventory);
+            listItemsWindow l = new listItemsWindow(player.getInventory());
         }
     }
     private class sellInventory implements ActionListener{
@@ -100,17 +112,19 @@ public class ingameMenuSlide {
         }
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            for(String key : Player.inventory.keySet()){
-                Player.gold += Player.inventory.get(key) * prices.get(key);
+            for(String key : player.getInventory().keySet()){
+                player.incrementGold(player.getInventory().get(key) * prices.get(key));
             }
         }
     }
 
     private class hoverMouseListener implements MouseListener {
+        private Player player;
         private viewGoldFrame goldFrame;
 
-        public hoverMouseListener() {
-            this.goldFrame = new viewGoldFrame();
+        public hoverMouseListener(Player player) {
+            this.player = player;
+            this.goldFrame = new viewGoldFrame(player);
         }
 
         @Override
@@ -130,7 +144,7 @@ public class ingameMenuSlide {
 
         @Override
         public void mouseEntered(MouseEvent mouseEvent) {
-            goldFrame.update();
+            goldFrame.update(player);
             goldFrame.showFrame();
         }
 

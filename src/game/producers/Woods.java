@@ -5,8 +5,8 @@ import game.Player;
 import java.io.IOException;
 
 public class Woods extends Producer{
-    public Woods() throws IOException {
-        super("../../resources/quary.jpg");
+    public Woods(Player player) throws IOException {
+        super("quary.jpg", player);
         buildingName = "Woods";
     }
 
@@ -15,6 +15,7 @@ public class Woods extends Producer{
         try {
             super.produce("Wood");
             Thread.sleep(coolDownMs);
+            System.out.println("+1");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

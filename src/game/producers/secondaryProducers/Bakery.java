@@ -5,8 +5,8 @@ import game.Player;
 import java.io.IOException;
 
 public class Bakery extends secondaryProducer {
-    public Bakery() throws IOException {
-        super("../../resources/bakery.jpg");
+    public Bakery(Player player) throws IOException {
+        super("bakery.jpg", player);
         buildingName = "Bakery";
     }
 

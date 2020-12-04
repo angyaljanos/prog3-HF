@@ -5,8 +5,8 @@ import game.Player;
 import java.io.IOException;
 
 public class Tanner extends secondaryProducer {
-    public Tanner() throws IOException {
-        super("../../resources/tanner.jpg");
+    public Tanner(Player player) throws IOException {
+        super("tanner.jpg", player);
         buildingName = "Tanner";
     }
 

@@ -8,13 +8,12 @@ import game.buildingPropertyWindow;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
-import java.util.HashMap;
 
-public abstract class Consumer extends baseBuilding implements Runnable {
+public abstract class Consumer extends baseBuilding {
     protected String targetProduct = "";
 
-    public Consumer(String path) throws IOException {
-        super(path);
+    public Consumer(String path,Player player) throws IOException {
+        super(path, player);
         addMouseListener(new mouseHandler(this));
     }
 
@@ -38,13 +37,13 @@ public abstract class Consumer extends baseBuilding implements Runnable {
     }
 
     protected void sell() throws InterruptedException {
-        Integer currentQuantity = Player.inventory.get(targetProduct);
+        Integer currentQuantity = owner.getInventory().get(targetProduct);
         Integer newQuantity = currentQuantity - 1 - (numberOfWorkers/5);
         if(currentQuantity <= 0)
             Thread.currentThread().wait();
         else {
-            Player.inventory.put(targetProduct, newQuantity > 0 ? newQuantity : 0);
-            Player.gold += ((long)newQuantity * (long)Game.prices.get(targetProduct));
+            owner.getInventory().put(targetProduct, newQuantity > 0 ? newQuantity : 0);
+            owner.incrementGold((long)newQuantity * (long)Game.prices.get(targetProduct));
         }
     }
     @Override

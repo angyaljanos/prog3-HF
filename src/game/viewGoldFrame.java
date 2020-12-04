@@ -8,8 +8,8 @@ import java.awt.event.MouseListener;
 public class viewGoldFrame extends JFrame {
     private JPanel container = new JPanel();
     private JLabel goldLabel;
-    public viewGoldFrame(){
-        goldLabel = new JLabel(Player.gold+"");
+    public viewGoldFrame(Player player){
+        goldLabel = new JLabel(String.valueOf(player.getGold()));
         container.setLayout(new GridLayout(0,1));
 
         container.add(goldLabel);
@@ -25,8 +25,8 @@ public class viewGoldFrame extends JFrame {
         setVisible(true);
     }
 
-    public void update(){
-        goldLabel.setText("Gold:" + Player.gold);
+    public void update(Player player){
+        goldLabel.setText("Gold:" + player.getGold());
         super.update(this.getGraphics());
     }
 

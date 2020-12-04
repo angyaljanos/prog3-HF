@@ -5,8 +5,8 @@ import game.Player;
 import java.io.IOException;
 
 public class Land extends Producer{
-    public Land() throws IOException {
-        super("../../resources/land.jpg");
+    public Land(Player player) throws IOException {
+        super("land.jpg", player);
         buildingName = "Land";
     }
 

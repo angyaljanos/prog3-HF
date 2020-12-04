@@ -5,8 +5,8 @@ import game.Player;
 import java.io.IOException;
 
 public class StoneCutter extends secondaryProducer{
-    public StoneCutter() throws IOException {
-        super("../../resources/stonecutter.jpg");
+    public StoneCutter(Player player) throws IOException {
+        super("stonecutter.jpg", player);
         buildingName = "StoneCutter";
     }
 
