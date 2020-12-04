@@ -14,12 +14,17 @@ public abstract class secondaryProducer extends Producer {
     public void produce(String resourceMaterial, String endProduct) throws InterruptedException {
         Integer currentResource = Player.inventory.get(resourceMaterial);
         Integer currentEndProduct = Player.inventory.get(endProduct);
-        if(currentResource < 0 || currentEndProduct > 20){
+
+        Integer newResource = currentResource - getProd();
+        Integer newEndProduct = currentResource + getQuantity();
+        if((currentResource < 0 || currentEndProduct > Player.capacityPerItem)
+                ||newResource <= 0 || newEndProduct >= Player.capacityPerItem)
+        {
             Thread.currentThread().wait();
         }
         else{
-            Player.inventory.put(resourceMaterial,currentResource - 1);
-            Player.inventory.put(endProduct,currentResource + 1);
+            Player.inventory.put(resourceMaterial,newResource);
+            Player.inventory.put(endProduct,newEndProduct);
             notifyAll();
         }
     }

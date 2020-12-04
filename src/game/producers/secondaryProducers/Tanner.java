@@ -1,10 +1,13 @@
 package game.producers.secondaryProducers;
 
+import game.Player;
+
 import java.io.IOException;
 
 public class Tanner extends secondaryProducer {
-    public Tanner(String path) throws IOException {
+    public Tanner() throws IOException {
         super("../../resources/tanner.jpg");
+        buildingName = "Tanner";
     }
 
     @Override

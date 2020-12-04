@@ -1,10 +1,13 @@
 package game.producers;
 
+import game.Player;
+
 import java.io.IOException;
 
 public class MineShaft extends Producer{
     public MineShaft() throws IOException {
         super("../../resources/mineshaft.jpg");
+        buildingName = "MineShaft";
     }
 
     @Override

@@ -4,67 +4,104 @@ import com.google.gson.Gson;
 import hw.MainFrame;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class Game {
-    public static HashMap<String,Integer> prices;
-    private ingameMenuSlide menuSlide;
-    private JPanel container;
-    private baseBuilding[] gamefields = new baseBuilding[16];;
-    private Player player;
-    GridLayout grid = new GridLayout(4,4);
+    public static HashMap prices = new HashMap<String,Integer>();
+    private static ingameMenuSlide menuSlide;
+    private static JPanel container;
+    private static baseBuilding[] gamefields = new baseBuilding[16];;
+    private static Player player;
+    private static GridLayout grid = new GridLayout(4,4);
 
-    public Game(MainFrame mainFrame){
+    public Game(MainFrame mainFrame) throws FileNotFoundException {
         container = new JPanel();
         player = new Player();
-        menuSlide = new ingameMenuSlide(mainFrame,player);
-        Player.gold = 0;
+        menuSlide = new ingameMenuSlide(mainFrame,player,prices);
 
         setPrices();
     }
 
-    public void showTiles(MainFrame mainFrame) throws IOException {
-        mainFrame.mainPanel.setLayout(grid);
-
+    private static void initTiles() throws IOException {
+        container.setLayout(grid);
+        menuSlide.setVisible(true);
         for(baseBuilding item: gamefields){
             item = new baseBuilding();
-
-
-            mainFrame.mainPanel.add(item);
-            mainFrame.pack();
+            container.add(item);
         }
-
+        MainFrame.mainPanel.add(container);
+        //container.getComponentAt()
     }
 
-    public void newGame(MainFrame mainFrame){
+    public static void newGame(Player player){
         try {
-            nameInsertForm nameInsertForm = new nameInsertForm();
-            player.setName(nameInsertForm.getName());
+            Player.gold = 0;
 
-            showTiles(mainFrame);
+            initTiles();
         }
         catch(IOException e){
             e.printStackTrace();
         }
     }
 
-    public void continuePreviousGame(MainFrame mainFrame){
-        try {//keress képeket és vágd körbe őket
-            showTiles(mainFrame);
+    public static void continuePreviousGame(MainFrame mainFrame){
+        try {
+            initTiles();
         }
         catch(IOException e){
             e.printStackTrace();
         }
     }
 
-    public void setPrices(){
-       //prices = new ObjectMapper().readValue(JSON_SOURCE, HashMap.class);
-
+    public  void setPrices() throws FileNotFoundException {
+        prices.clear();
+        Gson gson = new Gson();
+        //prices = gson.fromJson(new FileReader("..\\resources\\prices.json"),prices.getClass());
     }
 
-    public void save(){
+    public static void save(){
         Gson gson = new Gson();
     }
 
+
+    private class buyBuildingListener implements MouseListener{
+        buildingShopFrame buildingShopFrame;
+
+        private buyBuildingListener() throws IOException {
+            buildingShopFrame = new buildingShopFrame();
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent mouseEvent) {
+            Point pnt = MouseInfo.getPointerInfo().getLocation();
+            container.getComponentAt(pnt);
+        }
+
+        @Override
+        public void mousePressed(MouseEvent mouseEvent) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent mouseEvent) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent mouseEvent) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent mouseEvent) {
+
+        }
+    }
 }

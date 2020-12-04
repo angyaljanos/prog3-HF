@@ -2,40 +2,44 @@ package game;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class baseBuilding extends JPanel {
     protected BufferedImage image;
-    protected String buildingName;
+    protected String buildingName = "Field";
     protected int numberOfWorkers;
     protected long coolDownMs;
+    protected long cost;
 
     public baseBuilding(String path) throws IOException {
         image = ImageIO.read(new File(path));
-        addMouseListener(new propertyWindowOnHover(this));
 
-        panelSettings();
+        otherSettings();
     }
     public baseBuilding() throws IOException {
-        image = ImageIO.read(new File("../../resources/blank.jpg"));
+        image = ImageIO.read(Objects.requireNonNull(baseBuilding.class.getClassLoader().getResourceAsStream("blank.png")));
+
+        otherSettings();
+    }
+
+    private void otherSettings(){
+        setPreferredSize(new Dimension(180,180));
+        setBorder(new LineBorder(Color.black));
+        setBackground(Color.lightGray);
+
         addMouseListener(new propertyWindowOnHover(this));
 
-        panelSettings();
+        cost = 3;
     }
 
-    private void panelSettings(){
-        setPreferredSize(new Dimension(180,180));
-
-
-        setBackground(Color.lightGray);
-    }
-
-    public String getName(){
+    public String getBuildingName(){
         return buildingName;
     }
 
@@ -44,7 +48,17 @@ public class baseBuilding extends JPanel {
     }
 
     public int getQuantity(){
-        return 1 + (numberOfWorkers/5);
+        return 0;
+    }
+
+    protected void addWorker(){
+        if(Player.gold >= cost) {
+            numberOfWorkers++;
+            coolDownMs = 3000 / numberOfWorkers;
+
+            Player.gold -= cost;
+            cost *= 2;
+        }
     }
 
     @Override
@@ -53,7 +67,7 @@ public class baseBuilding extends JPanel {
         g.drawImage(image, 0, 0, this);
     }
 
-    protected class propertyWindowOnHover implements MouseListener {
+    private static class propertyWindowOnHover implements MouseListener {
         buildingPropertyWindow propertyWindow;
 
         public propertyWindowOnHover(baseBuilding building){

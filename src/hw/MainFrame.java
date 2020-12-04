@@ -2,11 +2,12 @@ package hw;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 
 public class MainFrame extends JFrame {
-    public JPanel mainPanel = new JPanel();
+    public static JPanel mainPanel = new JPanel();
     // Felépítjük az ablakot
-    public MainFrame(){
+    public MainFrame() throws FileNotFoundException {
         super("Consumer-Producer Game");
         super.frameInit();
         setDefaultCloseOperation(EXIT_ON_CLOSE);

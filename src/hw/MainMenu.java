@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 public class MainMenu {
     private static final JPanel menuPanel = new JPanel();
@@ -17,7 +18,7 @@ public class MainMenu {
 
     public Game game;
 
-    public MainMenu(MainFrame mainFrame){
+    public MainMenu(MainFrame mainFrame) throws FileNotFoundException {
         layout = new GroupLayout(mainFrame);
         layout.setAutoCreateGaps(true);
 
@@ -32,13 +33,17 @@ public class MainMenu {
         menuPanel.add(continueButton);
         menuPanel.add(quitButton);
 
-        mainFrame.mainPanel.add(menuPanel);
+        MainFrame.mainPanel.add(menuPanel);
 
         game = new Game(mainFrame);
     }
 
     public class newGameButtonListener implements ActionListener {
-        MainFrame mainFrame;
+        private MainFrame mainFrame;
+        private Player player;
+        public newGameButtonListener(Player player){
+            this.player = player;
+        }
 
         public newGameButtonListener(MainFrame mainFrame){
             this.mainFrame = mainFrame;
@@ -46,7 +51,7 @@ public class MainMenu {
         @Override
         public void actionPerformed(ActionEvent e) {
             removeMenuComponents(mainFrame);
-            game.newGame(mainFrame);
+            game.newGame(player);
         }
         public void removeMenuComponents(MainFrame mainFrame){
             mainFrame.mainPanel.remove(menuPanel);

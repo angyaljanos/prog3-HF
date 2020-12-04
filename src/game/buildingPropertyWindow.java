@@ -12,24 +12,31 @@ public class buildingPropertyWindow extends JFrame {
 
     public buildingPropertyWindow(baseBuilding building){
         setResizable(false);
-        setSize(new Dimension(50,50));
+        setSize(new Dimension(150,70));
         setUndecorated(true);
 
-        nameLabel = new JLabel(building.getName());
+        container = new JPanel();
+
+        nameLabel = new JLabel(building.getBuildingName());
         container.add(nameLabel);
 
         coolDownLabel = new JLabel("Cooldown:" + building.getCoolDownMs());
         container.add(coolDownLabel);
 
-        productionLabel = new JLabel("Current quantity:" + building.getQuantity());
+        productionLabel = new JLabel(building.getQuantity()+" item/sec");
         container.add(productionLabel);
 
         container.setLayout(grid);
         add(container);
         container.setSize(container.getParent().getSize());
+
     }
 
     public void showProperties(){
         setVisible(true);
+        Point tmp = MouseInfo.getPointerInfo().getLocation();
+        Dimension dim = new Dimension(tmp.x, tmp.y);
+        //this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        this.setLocation(dim.width, dim.height);
     }
 }
