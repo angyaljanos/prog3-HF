@@ -30,9 +30,12 @@ public abstract class Producer extends baseBuilding {
             }
         }
     }
+    protected abstract String getBaseName();
+
+    @Override
     public String getBuildingName(){
 
-        return super.getBuildingName() + "Lv."+numberOfWorkers;
+        return getName() + "Lv."+numberOfWorkers;
     }
 
     public int getProd(){

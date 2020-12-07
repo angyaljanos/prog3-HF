@@ -8,7 +8,6 @@ import java.io.IOException;
 public class Land extends Producer{
     public Land(Player player, MainFrame mainFrame) throws IOException {
         super("land.jpg", player, mainFrame);
-        buildingName = "Land";
     }
 
     @Override
@@ -19,5 +18,10 @@ public class Land extends Producer{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected String getBaseName() {
+        return "Land";
     }
 }

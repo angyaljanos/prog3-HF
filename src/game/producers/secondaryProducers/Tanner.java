@@ -8,7 +8,6 @@ import java.io.IOException;
 public class Tanner extends secondaryProducer {
     public Tanner(Player player,MainFrame mainFrame) throws IOException {
         super("tanner.jpg", player, mainFrame);
-        buildingName = "Tanner";
     }
 
     @Override
@@ -18,5 +17,9 @@ public class Tanner extends secondaryProducer {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+    @Override
+    protected String getBaseName() {
+        return "Tanner";
     }
 }

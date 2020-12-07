@@ -7,8 +7,7 @@ import java.io.IOException;
 
 public class MineShaft extends Producer{
     public MineShaft(Player player, MainFrame mainFrame) throws IOException {
-        super("mineshaft.jpg", player, mainFrame);
-        buildingName = "MineShaft";
+        super("mineshaft.jpg", player, mainFrame);;
     }
 
     @Override
@@ -19,5 +18,9 @@ public class MineShaft extends Producer{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+    @Override
+    protected String getBaseName() {
+        return "MineShaft";
     }
 }

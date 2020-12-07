@@ -8,7 +8,6 @@ import java.io.IOException;
 public class Sawmill extends secondaryProducer {
     public Sawmill(Player player, MainFrame mainFrame) throws IOException {
         super("sawmill.jpg", player, mainFrame);
-        buildingName = "Sawmill";
     }
 
     @Override
@@ -18,5 +17,9 @@ public class Sawmill extends secondaryProducer {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+    @Override
+    protected String getBaseName() {
+        return "Sawmill";
     }
 }

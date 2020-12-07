@@ -14,7 +14,6 @@ import java.util.Objects;
 
 public class baseBuilding extends JPanel implements Runnable{
     protected BufferedImage image;
-    protected String buildingName = "Field";
     protected int numberOfWorkers;
     protected long coolDownMs;
     protected long cost;
@@ -47,7 +46,7 @@ public class baseBuilding extends JPanel implements Runnable{
     }
 
     public String getBuildingName(){
-        return buildingName;
+        return "Field";
     }
 
     public long getCoolDownMs(){

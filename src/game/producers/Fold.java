@@ -8,7 +8,6 @@ import java.io.IOException;
 public class Fold extends Producer{
     public Fold(Player player, MainFrame mainFrame) throws IOException {
         super("fold.jpg", player, mainFrame);
-        buildingName = "Fold";
     }
 
     @Override
@@ -20,6 +19,11 @@ public class Fold extends Producer{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected String getBaseName() {
+        return "Fold";
     }
 }
 

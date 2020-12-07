@@ -26,9 +26,12 @@ public abstract class Consumer extends baseBuilding {
         this.targetProduct = targetProduct;
     }
 
+    protected abstract String getBaseName();
+
+    @Override
     public String getBuildingName(){
 
-        return super.getBuildingName() + "Lv."+numberOfWorkers;
+        return getName() + "Lv."+numberOfWorkers;
     }
 
     public void run() {
