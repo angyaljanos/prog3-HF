@@ -41,11 +41,18 @@ public class Game {
 
     public void newGame(MainFrame mainFrame){
         try {
-            player.setGold(2);
+            initPlayersInventory();
             initTiles(mainFrame);
         }
         catch(IOException e){
             e.printStackTrace();
+        }
+    }
+    private void initPlayersInventory() throws FileNotFoundException {
+        Gson gson =  new Gson();
+        player.inventory = gson.fromJson( new FileReader(new File("").getAbsolutePath().concat("/resources/prices.json")), player.getInventory().getClass());
+        for (String item: player.inventory.keySet()){
+            player.inventory.put(item, 0);
         }
     }
 
@@ -73,36 +80,7 @@ public class Game {
         fileWriter.close();
     }
 
-    private class buyBuildingListener implements MouseListener{
-        buildingShopFrame buildingShopFrame;
-
-        private buyBuildingListener() throws IOException {
-            buildingShopFrame = new buildingShopFrame((baseBuilding)container.getComponentAt(MouseInfo.getPointerInfo().getLocation()));
-        }
-
-        @Override
-        public void mouseClicked(MouseEvent mouseEvent) {
-
-        }
-
-        @Override
-        public void mousePressed(MouseEvent mouseEvent) {
-
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent mouseEvent) {
-
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent mouseEvent) {
-
-        }
-
-        @Override
-        public void mouseExited(MouseEvent mouseEvent) {
-
-        }
+    public static baseBuilding[] getGameFileds(){
+        return gamefields;
     }
 }

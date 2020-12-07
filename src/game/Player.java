@@ -20,12 +20,6 @@ public class Player {
 
     public Player() throws FileNotFoundException {
         gold = 3;
-
-        initInventory();
-    }
-    private void initInventory() throws FileNotFoundException {
-        Gson gson = new Gson();
-        //inventory = gson.fromJson( new FileReader(new File("").getAbsolutePath().concat("/resources/game.json")), inventory.getClass());
     }
 
     public void setCurrentDate(){

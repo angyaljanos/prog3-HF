@@ -60,47 +60,51 @@ public class buildingShopFrame extends JFrame {
     }
 
     public void addNew(MainFrame mainFrame) throws IOException {
-
+        baseBuilding tmp;
         switch (choosedBuildingName){
             case "Woods":
-                newBuilding = new Woods(newBuilding.owner, mainFrame);
+                tmp = new Woods(newBuilding.owner, mainFrame);
                 break;
             case "Quarry":
-                newBuilding = new Quarry(newBuilding.owner, mainFrame);
+                tmp = new Quarry(newBuilding.owner, mainFrame);
                 break;
             case "Fold":
-                newBuilding = new Fold(newBuilding.owner, mainFrame);
+                tmp = new Fold(newBuilding.owner, mainFrame);
                 break;
             case "Land":
-                newBuilding = new Land(newBuilding.owner, mainFrame);
+                tmp = new Land(newBuilding.owner, mainFrame);
                 break;
             case "Mine Shaft":
-                newBuilding = new MineShaft(newBuilding.owner, mainFrame);
+                tmp = new MineShaft(newBuilding.owner, mainFrame);
                 break;
             case "Seller Market":
-                newBuilding = new sellerMarket(newBuilding.owner, mainFrame);
+                tmp = new sellerMarket(newBuilding.owner, mainFrame);
                 break;
             case "Saw Mill":
-                newBuilding = new Sawmill(newBuilding.owner, mainFrame);
+                tmp = new Sawmill(newBuilding.owner, mainFrame);
                 break;
             case "Stone Cutter":
-                newBuilding = new StoneCutter(newBuilding.owner, mainFrame);
+                tmp = new StoneCutter(newBuilding.owner, mainFrame);
                 break;
             case "Bakery":
-                newBuilding = new Bakery(newBuilding.owner, mainFrame);
+                tmp = new Bakery(newBuilding.owner, mainFrame);
                 break;
             case "Oven":
-                newBuilding = new Oven(newBuilding.owner, mainFrame);
+                tmp = new Oven(newBuilding.owner, mainFrame);
                 break;
             case "Smeltery":
-                newBuilding = new Smeltery(newBuilding.owner, mainFrame);
+                tmp = new Smeltery(newBuilding.owner, mainFrame);
                 break;
             case "Tanner":
-                newBuilding = new Tanner(newBuilding.owner, mainFrame);
+                tmp = new Tanner(newBuilding.owner, mainFrame);
                 break;
-            default:newBuilding = new baseBuilding(newBuilding.owner, mainFrame);
+            default:tmp = new baseBuilding(newBuilding.owner, mainFrame);
         }
-
+        for (int i = 0; i < Game.getGameFileds().length; i++){
+            if(Game.getGameFileds()[i] == newBuilding){
+                Game.getGameFileds()[i] = tmp;
+            }
+        }
     }
 
     private class getBuildingNameListener implements ActionListener{
