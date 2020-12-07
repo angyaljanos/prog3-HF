@@ -31,9 +31,9 @@ public class Game {
     private void initTiles(MainFrame mainFrame) throws IOException {
         container.setLayout(grid);
         menuSlide.setVisible(true);
-        for(baseBuilding item: gamefields){
-            item = new baseBuilding(player, mainFrame);
-            container.add(item);
+        for(int i = 0;i < gamefields.length; i++){
+            gamefields[i] = new baseBuilding(player, mainFrame);
+            container.add(gamefields[i]);
         }
 
         mainFrame.mainPanel.add(container);
@@ -78,6 +78,14 @@ public class Game {
         gson.toJson(player, fileWriter);
 
         fileWriter.close();
+    }
+
+    public static void refresh(){
+        container.removeAll();
+        for (baseBuilding item : gamefields){
+            container.add(item);
+        }
+        container.updateUI();
     }
 
     public static baseBuilding[] getGameFileds(){

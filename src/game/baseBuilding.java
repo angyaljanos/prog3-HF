@@ -37,7 +37,7 @@ public class baseBuilding extends JPanel implements Runnable{
         settings();
     }
 
-    private void settings(){
+    protected void settings(){
         setPreferredSize(new Dimension(180,180));
         setBorder(new LineBorder(Color.black));
         setBackground(Color.lightGray);

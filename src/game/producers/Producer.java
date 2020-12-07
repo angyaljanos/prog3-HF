@@ -19,7 +19,6 @@ public abstract class Producer extends baseBuilding {
     public void produce(String productName) throws InterruptedException {
         while(true) {
             Integer currentQuantity = (Integer) owner.getInventory().get(productName);
-            System.out.println(owner.getInventory().get(productName));
             if (currentQuantity > Player.capacityPerItem)
                 Thread.currentThread().wait();
             else {
@@ -38,6 +37,10 @@ public abstract class Producer extends baseBuilding {
 
     public int getProd(){
         return 1 + (numberOfWorkers/5);
+    }
+
+    @Override
+    protected void settings(){
     }
 
     protected class mouseHandler implements MouseListener {

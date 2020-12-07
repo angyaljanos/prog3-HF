@@ -18,6 +18,10 @@ public abstract class Consumer extends baseBuilding {
         addMouseListener(new mouseHandler(this));
     }
 
+    @Override
+    protected void settings(){
+    }
+
     public void setTargetProduct(String targetProduct) {
         this.targetProduct = targetProduct;
     }

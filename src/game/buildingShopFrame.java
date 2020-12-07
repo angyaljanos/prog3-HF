@@ -103,6 +103,7 @@ public class buildingShopFrame extends JFrame {
         for (int i = 0; i < Game.getGameFileds().length; i++){
             if(Game.getGameFileds()[i] == newBuilding){
                 Game.getGameFileds()[i] = tmp;
+                Game.refresh();
             }
         }
     }
