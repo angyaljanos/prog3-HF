@@ -1,12 +1,13 @@
 package game.producers;
 
 import game.Player;
+import hw.MainFrame;
 
 import java.io.IOException;
 
 public class Fold extends Producer{
-    public Fold(Player player) throws IOException {
-        super("fold.jpg", player);
+    public Fold(Player player, MainFrame mainFrame) throws IOException {
+        super("fold.jpg", player, mainFrame);
         buildingName = "Fold";
     }
 
@@ -21,3 +22,4 @@ public class Fold extends Producer{
         }
     }
 }
+

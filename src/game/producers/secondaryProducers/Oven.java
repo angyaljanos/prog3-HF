@@ -1,12 +1,13 @@
 package game.producers.secondaryProducers;
 
 import game.Player;
+import hw.MainFrame;
 
 import java.io.IOException;
 
 public class Oven extends secondaryProducer {
-    public Oven(Player player) throws IOException {
-        super("oven.jpg", player);
+    public Oven(Player player, MainFrame mainFrame) throws IOException {
+        super("oven.jpg", player,mainFrame);
         buildingName = "Oven";
     }
 

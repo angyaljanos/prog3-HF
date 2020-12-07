@@ -2,13 +2,14 @@ package game.producers.secondaryProducers;
 
 import game.Player;
 import game.producers.Producer;
+import hw.MainFrame;
 
 import java.io.IOException;
 
 public abstract class secondaryProducer extends Producer {
 
-    public secondaryProducer(String path,Player player) throws IOException {
-        super(path, player);
+    public secondaryProducer(String path,Player player, MainFrame mainFrame) throws IOException {
+        super(path, player, mainFrame);
     }
 
     public void produce(String resourceMaterial, String endProduct) throws InterruptedException {

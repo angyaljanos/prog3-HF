@@ -9,8 +9,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.*;
 import java.util.HashMap;
-import java.util.Objects;
-import java.util.Scanner;
 
 public class Game {
     public static HashMap prices = new HashMap<String,Integer>();
@@ -30,21 +28,21 @@ public class Game {
         setPrices();
     }
 
-    private void initTiles() throws IOException {
+    private void initTiles(MainFrame mainFrame) throws IOException {
         container.setLayout(grid);
         menuSlide.setVisible(true);
         for(baseBuilding item: gamefields){
-            item = new baseBuilding(player);
+            item = new baseBuilding(player, mainFrame);
             container.add(item);
         }
-        MainFrame.mainPanel.add(container);
-        //container.getComponentAt()
+
+        mainFrame.mainPanel.add(container);
     }
 
-    public void newGame(){
+    public void newGame(MainFrame mainFrame){
         try {
             player.setGold(2);
-            initTiles();
+            initTiles(mainFrame);
         }
         catch(IOException e){
             e.printStackTrace();
@@ -53,7 +51,7 @@ public class Game {
 
     public void continuePreviousGame(MainFrame mainFrame){
         try {
-            initTiles();
+            initTiles(mainFrame);
         }
         catch(IOException e){
             e.printStackTrace();
@@ -67,7 +65,6 @@ public class Game {
         System.out.println("prices.size:" + prices.keySet().size());
     }
 
-
     public void save() throws IOException {
         Gson gson = new Gson();
         FileWriter fileWriter = new FileWriter(new File("").getAbsolutePath().concat("/resources/game.json"));
@@ -75,7 +72,6 @@ public class Game {
 
         fileWriter.close();
     }
-
 
     private class buyBuildingListener implements MouseListener{
         buildingShopFrame buildingShopFrame;
@@ -86,8 +82,7 @@ public class Game {
 
         @Override
         public void mouseClicked(MouseEvent mouseEvent) {
-            Point pnt = MouseInfo.getPointerInfo().getLocation();
-            container.getComponentAt(pnt);
+
         }
 
         @Override

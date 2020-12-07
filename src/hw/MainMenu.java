@@ -52,7 +52,7 @@ public class MainMenu {
         quitButton.setFont(new Font("Arial",Font.BOLD,30));
 
         menuPanel.setLayout(layout);
-        MainFrame.mainPanel.add(menuPanel);
+        mainFrame.mainPanel.add(menuPanel);
     }
 
     public void removeMenuComponents(MainFrame mainFrame){
@@ -73,7 +73,7 @@ public class MainMenu {
         @Override
         public void actionPerformed(ActionEvent e) {
             removeMenuComponents(mainFrame);
-            game.newGame();
+            game.newGame(mainFrame);
         }
 
     }

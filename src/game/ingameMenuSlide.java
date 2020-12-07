@@ -24,7 +24,7 @@ public class ingameMenuSlide {
 
     public ingameMenuSlide(MainFrame mainFrame,Player player,Game game){
         initializeGameMenu(player,Game.prices);
-        initializeStorageMenu(player, game);
+        initializeStorageMenu(player, game, mainFrame);
         initializeGoldMenu(player);
 
         menuBar.setVisible(false);
@@ -32,14 +32,14 @@ public class ingameMenuSlide {
         mainFrame.setJMenuBar(menuBar);
     }
 
-    public void initializeStorageMenu(Player player,Game game){
+    public void initializeStorageMenu(Player player,Game game,MainFrame mainFrame){
         storageMenu.setText("Storage");
         for(int i = 0; i < storageFunctions.length; i++){
             storageMenuItems[i] = new JMenuItem(storageFunctions[i]);
             storageMenu.add(storageMenuItems[i]);
         }
         storageMenuItems[0].addActionListener(new gameSaverListener(game));
-        storageMenuItems[1].addActionListener(new newGameListener(player,game));
+        storageMenuItems[1].addActionListener(new newGameListener(player, game, mainFrame));
         menuBar.add(storageMenu);
     }
 
@@ -83,13 +83,15 @@ public class ingameMenuSlide {
     private class newGameListener implements ActionListener{
         private Player player;
         private Game currentGame;
-        public newGameListener(Player player, Game game){
+        private MainFrame mainFrame;
+        public newGameListener(Player player, Game game, MainFrame mainFrame){
             this.player = player;
             currentGame = game;
+            this.mainFrame = mainFrame;
         }
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            currentGame.newGame();
+            currentGame.newGame(mainFrame);
         }
     }
 

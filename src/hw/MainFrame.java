@@ -5,7 +5,7 @@ import java.awt.*;
 import java.io.FileNotFoundException;
 
 public class MainFrame extends JFrame {
-    public static JPanel mainPanel = new JPanel();
+    public JPanel mainPanel = new JPanel();
     public MainFrame() throws FileNotFoundException {
         super("Consumer-Producer Game");
         super.frameInit();

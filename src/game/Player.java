@@ -1,5 +1,10 @@
 package game;
 
+import com.google.gson.Gson;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -13,8 +18,14 @@ public class Player {
 
     private LocalDateTime lastSaved;
 
-    public Player(){
+    public Player() throws FileNotFoundException {
         gold = 3;
+
+        initInventory();
+    }
+    private void initInventory() throws FileNotFoundException {
+        Gson gson = new Gson();
+        inventory = gson.fromJson( new FileReader(new File("").getAbsolutePath().concat("/resources/game.json")), inventory.getClass());
     }
 
     public void setCurrentDate(){

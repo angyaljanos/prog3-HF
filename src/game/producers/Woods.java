@@ -1,12 +1,13 @@
 package game.producers;
 
 import game.Player;
+import hw.MainFrame;
 
 import java.io.IOException;
 
 public class Woods extends Producer{
-    public Woods(Player player) throws IOException {
-        super("quary.jpg", player);
+    public Woods(Player player, MainFrame mainFrame) throws IOException {
+        super("quary.jpg", player, mainFrame);
         buildingName = "Woods";
     }
 

@@ -4,6 +4,7 @@ import game.Game;
 import game.Player;
 import game.baseBuilding;
 import game.buildingPropertyWindow;
+import hw.MainFrame;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -12,8 +13,8 @@ import java.io.IOException;
 public abstract class Consumer extends baseBuilding {
     protected String targetProduct = "";
 
-    public Consumer(String path,Player player) throws IOException {
-        super(path, player);
+    public Consumer(String path,Player player,MainFrame mainFrame) throws IOException {
+        super(path, player, mainFrame);
         addMouseListener(new mouseHandler(this));
     }
 

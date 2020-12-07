@@ -1,5 +1,7 @@
 package game;
 
+import hw.MainFrame;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -17,17 +19,21 @@ public class baseBuilding extends JPanel implements Runnable{
     protected long coolDownMs;
     protected long cost;
     protected Player owner;
+    protected MainFrame mainFrame;
+    protected Thread thread = new Thread(this);
 
-    public baseBuilding(String path, Player player) throws IOException {
+    public baseBuilding(String path, Player player, MainFrame mainFrame) throws IOException {
         image = ImageIO.read(Objects.requireNonNull(baseBuilding.class.getClassLoader().getResourceAsStream(path)));
         owner = player;
 
+        this.mainFrame = mainFrame;
         settings();
     }
-    public baseBuilding(Player player) throws IOException {
+    public baseBuilding(Player player,MainFrame mainFrame) throws IOException {
         image = ImageIO.read(Objects.requireNonNull(baseBuilding.class.getClassLoader().getResourceAsStream("blank.png")));
         owner = player;
 
+        this.mainFrame = mainFrame;
         settings();
     }
 
@@ -37,8 +43,7 @@ public class baseBuilding extends JPanel implements Runnable{
         setBackground(Color.lightGray);
 
         addMouseListener(new propertyWindowOnHover(this));
-
-        cost = 3;
+        thread.start();
     }
 
     public String getBuildingName(){
@@ -67,6 +72,10 @@ public class baseBuilding extends JPanel implements Runnable{
 
     public Player getOwner() {
         return owner;
+    }
+
+    public void paint(MainFrame mainFrame){
+        mainFrame.repaint();
     }
 
     @Override
