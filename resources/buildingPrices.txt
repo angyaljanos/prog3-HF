@@ -1,0 +1,13 @@
+Seller Market:2
+Woods:1
+Fold:4
+Land:1
+Mine Shaft:2
+Quarry:1
+Saw Mill:5
+Oven:5
+Bakery:7
+Saw Mill:4
+Smeltery:8
+Stone Cutter:3
+Tanner:10
