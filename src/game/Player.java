@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 public class Player {
     public HashMap<String,Integer> inventory = new HashMap<>();
     public static final int capacityPerItem = 20;
-    public long gold;
+    private long gold;
 
     private LocalDateTime lastSaved;
 

@@ -67,7 +67,7 @@ public class baseBuilding extends JPanel implements Runnable{
         }
     }
 
-    private baseBuilding getBuilding(){return this;}
+    protected baseBuilding getBuilding(){return this;}
 
     public Player getOwner() {
         return owner;

@@ -12,9 +12,9 @@ import java.util.HashMap;
 public class ingameMenuSlide {
     private JMenuBar menuBar = new JMenuBar();
 
-    private JMenu storageMenu = new JMenu();
-    private JMenu gameFunctionsMenu = new JMenu();
-    private JMenu goldMenu = new JMenu();
+    private static JMenu storageMenu = new JMenu();
+    private static JMenu gameFunctionsMenu = new JMenu();
+    private static JMenu goldMenu = new JMenu();
 
     private final String[] gameFunctions = {"Save","New Game"};
     private final String[] storageFunctions = {"View", "Sell All"};
@@ -55,8 +55,7 @@ public class ingameMenuSlide {
     }
 
     public void initializeGoldMenu(Player player){
-        goldMenu.setText("Gold");
-        goldMenu.addMouseListener(new hoverMouseListener(player));
+        goldMenu.setText("Gold: " + player.getGold());
         menuBar.add(goldMenu);
     }
 
@@ -115,8 +114,10 @@ public class ingameMenuSlide {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             for(String key : player.getInventory().keySet()){
-                player.incrementGold(player.getInventory().get(key) * prices.get(key));
+                int value = (int)player.getInventory().get(key) * (int)prices.get(key);
+                player.incrementGold(value);
             }
+            refresh(player);
         }
     }
 
@@ -154,5 +155,9 @@ public class ingameMenuSlide {
         public void mouseExited(MouseEvent mouseEvent) {
             goldFrame.dispose();
         }
+    }
+
+    public static  void refresh(Player player){
+        goldMenu.setText("Gold: " + player.getGold());
     }
 }

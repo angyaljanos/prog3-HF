@@ -6,11 +6,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class buildingPropertyWindow extends JFrame {
-    private JPanel container;
-    private JLabel nameLabel;
-    private JLabel coolDownLabel;
-    private JLabel productionLabel;
-    private GridLayout grid = new GridLayout(0,1);
+    public static  boolean isOpen = false;
+
+    protected JPanel container;
+    protected JLabel nameLabel;
+    protected JLabel coolDownLabel;
+    protected JLabel productionLabel;
+    protected GridLayout grid = new GridLayout(0,1);
 
     public buildingPropertyWindow(baseBuilding building){
         setResizable(false);
@@ -32,7 +34,7 @@ public class buildingPropertyWindow extends JFrame {
         add(container);
         container.setSize(container.getParent().getSize());
 
-        (new Timer(200, actionEvent -> {
+        (new Timer(20, actionEvent -> {
             nameLabel.setText(building.getBuildingName());
             coolDownLabel.setText("Cooldown:" + building.getCoolDownMs());
             productionLabel.setText(building.getQuantity()+" item/sec");
@@ -40,10 +42,11 @@ public class buildingPropertyWindow extends JFrame {
     }
 
     public void showProperties(){
-        setVisible(true);
-        Point tmp = MouseInfo.getPointerInfo().getLocation();
-        Dimension dim = new Dimension(tmp.x, tmp.y);
-        //this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-        this.setLocation(dim.width, dim.height);
+        if(!isOpen) {
+            setVisible(true);
+            Point tmp = MouseInfo.getPointerInfo().getLocation();
+            Dimension dim = new Dimension(tmp.x, tmp.y);
+            this.setLocation(dim.width, dim.height);
+        }
     }
 }

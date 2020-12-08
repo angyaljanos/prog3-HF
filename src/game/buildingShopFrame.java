@@ -124,6 +124,7 @@ public class buildingShopFrame extends JFrame {
                     choosedBuildingName = bname;
 
                     addNew(newBuilding.mainFrame);
+                    ingameMenuSlide.refresh(owner);
                 }
             } catch (IOException e) {
                 e.printStackTrace();

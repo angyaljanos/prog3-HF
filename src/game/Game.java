@@ -64,7 +64,7 @@ public class Game {
         }
     }
 
-    public  void setPrices() throws FileNotFoundException {
+    public void setPrices() throws FileNotFoundException {
         prices.clear();
         Gson gson =  new Gson();
         prices = gson.fromJson( new FileReader(new File("").getAbsolutePath().concat("/resources/prices.json")), prices.getClass());
@@ -85,6 +85,7 @@ public class Game {
             container.add(item);
         }
         container.updateUI();
+
     }
 
 }

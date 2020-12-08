@@ -1,10 +1,7 @@
 package game.consumers;
 
-import game.Game;
-import game.Player;
-import game.baseBuilding;
-import game.buildingPropertyWindow;
-import hw.MainFrame;
+import game.*;
+import hw.*;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -54,6 +51,7 @@ public abstract class Consumer extends baseBuilding {
             owner.getInventory().put(targetProduct, newQuantity > 0 ? newQuantity : 0);
             owner.incrementGold((long)newQuantity * (long)Game.prices.get(targetProduct));
         }
+        ingameMenuSlide.refresh(owner);
     }
     @Override
     public int getQuantity(){
@@ -61,15 +59,17 @@ public abstract class Consumer extends baseBuilding {
     }
 
     protected class mouseHandler implements MouseListener {
-        buildingPropertyWindow propertyWindow;
+        buildingPropertyWindow hoverWindow;
+        sellerPropertyWindow interactWindow;
 
         public mouseHandler(baseBuilding building){
-            propertyWindow = new buildingPropertyWindow(building);
+            hoverWindow = new buildingPropertyWindow(building);
+            interactWindow = new sellerPropertyWindow(getBuilding());
         }
 
         @Override
         public void mouseClicked(MouseEvent mouseEvent) {
-            addWorker();
+            interactWindow.showProperties();
         }
 
         @Override
@@ -84,12 +84,13 @@ public abstract class Consumer extends baseBuilding {
 
         @Override
         public void mouseEntered(MouseEvent mouseEvent) {
-            propertyWindow.showProperties();
+            hoverWindow.showProperties();
         }
 
         @Override
         public void mouseExited(MouseEvent mouseEvent) {
-            propertyWindow.dispose();
+            hoverWindow.dispose();
+            buildingPropertyWindow.isOpen = false;
         }
     }
 }
