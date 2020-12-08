@@ -22,35 +22,35 @@ public class ingameMenuSlide {
     private JMenuItem[] storageMenuItems = new JMenuItem[storageFunctions.length];
     private JMenuItem[] gameMenuItems = new JMenuItem[gameFunctions.length];
 
-    public ingameMenuSlide(MainFrame mainFrame,Player player,Game game){
-        initializeGameMenu(player,Game.prices);
-        initializeStorageMenu(player, game, mainFrame);
-        initializeGoldMenu(player);
+    public ingameMenuSlide(MainFrame mainFrame,Game game){
+        initializeGameMenu(game.player,game, mainFrame);
+        initializeStorageMenu(game.player, Game.prices);
+        initializeGoldMenu(game.player);
 
         menuBar.setVisible(false);
 
         mainFrame.setJMenuBar(menuBar);
     }
 
-    public void initializeStorageMenu(Player player,Game game,MainFrame mainFrame){
+    public void initializeStorageMenu(Player player,HashMap<String,Integer> pricelist){
         storageMenu.setText("Storage");
         for(int i = 0; i < storageFunctions.length; i++){
             storageMenuItems[i] = new JMenuItem(storageFunctions[i]);
             storageMenu.add(storageMenuItems[i]);
         }
-        storageMenuItems[0].addActionListener(new gameSaverListener(game));
-        storageMenuItems[1].addActionListener(new newGameListener(player, game, mainFrame));
+        storageMenuItems[0].addActionListener(new viewStorage(player));
+        storageMenuItems[1].addActionListener(new sellInventory(player,pricelist));
         menuBar.add(storageMenu);
     }
 
-    public void initializeGameMenu(Player player,HashMap<String,Integer> priceList){
+    public void initializeGameMenu(Player player,Game game,MainFrame mainFrame){
         gameFunctionsMenu.setText("Game");
         for(int i = 0; i < gameFunctions.length; i++){
             gameMenuItems[i] = new JMenuItem(gameFunctions[i]);
             gameFunctionsMenu.add(gameMenuItems[i]);
         }
-        gameMenuItems[0].addActionListener(new viewStorage(player));
-        gameMenuItems[1].addActionListener(new sellInventory(player,priceList));
+        gameMenuItems[0].addActionListener(new gameSaverListener(game));
+        gameMenuItems[1].addActionListener(new newGameListener(player,game,mainFrame));
         menuBar.add(gameFunctionsMenu);
     }
 

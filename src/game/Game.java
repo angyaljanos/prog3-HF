@@ -13,19 +13,18 @@ import java.util.HashMap;
 public class Game {
     public static HashMap prices = new HashMap<String,Integer>();
     private static JPanel container;
-    private static baseBuilding[] gamefields = new baseBuilding[16];;
+    public static baseBuilding[] gamefields = new baseBuilding[16];;
 
     private static GridLayout grid = new GridLayout(4,4);
 
-    private Player player;
+    public Player player;
     private ingameMenuSlide menuSlide;
 
     public Game(MainFrame mainFrame) throws FileNotFoundException {
+        setPrices();
         container = new JPanel();
         player = new Player();
-        menuSlide = new ingameMenuSlide(mainFrame,player,this);
-
-        setPrices();
+        menuSlide = new ingameMenuSlide(mainFrame,this);
     }
 
     private void initTiles(MainFrame mainFrame) throws IOException {
@@ -88,7 +87,4 @@ public class Game {
         container.updateUI();
     }
 
-    public static baseBuilding[] getGameFileds(){
-        return gamefields;
-    }
 }

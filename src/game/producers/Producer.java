@@ -14,6 +14,8 @@ public abstract class Producer extends baseBuilding {
     public Producer(String path, Player player, MainFrame mainFrame) throws IOException {
         super(path, player, mainFrame);
         addMouseListener(new mouseHandler(this));
+        coolDownMs = 3000;
+        numberOfWorkers = 1;
     }
 
     public void produce(String productName) throws InterruptedException {
@@ -22,7 +24,7 @@ public abstract class Producer extends baseBuilding {
             if (currentQuantity > Player.capacityPerItem)
                 Thread.currentThread().wait();
             else {
-                int newQuantity = currentQuantity + getProd();
+                int newQuantity = currentQuantity + getQuantity();
                     if (newQuantity > Player.capacityPerItem)
                         newQuantity = Player.capacityPerItem;
 
@@ -35,10 +37,11 @@ public abstract class Producer extends baseBuilding {
     @Override
     public String getBuildingName(){
 
-        return getName() + "Lv."+numberOfWorkers;
+        return getBaseName() + "Lv."+numberOfWorkers;
     }
 
-    public int getProd(){
+    @Override
+    public int getQuantity(){
         return 1 + (numberOfWorkers/5);
     }
 
@@ -55,7 +58,7 @@ public abstract class Producer extends baseBuilding {
 
         @Override
         public void mouseClicked(MouseEvent mouseEvent) {
-            addWorker();
+            //addWorker();
         }
 
         @Override

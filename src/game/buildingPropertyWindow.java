@@ -2,6 +2,8 @@ package game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class buildingPropertyWindow extends JFrame {
     private JPanel container;
@@ -30,6 +32,11 @@ public class buildingPropertyWindow extends JFrame {
         add(container);
         container.setSize(container.getParent().getSize());
 
+        (new Timer(200, actionEvent -> {
+            nameLabel.setText(building.getBuildingName());
+            coolDownLabel.setText("Cooldown:" + building.getCoolDownMs());
+            productionLabel.setText(building.getQuantity()+" item/sec");
+        })).start();
     }
 
     public void showProperties(){

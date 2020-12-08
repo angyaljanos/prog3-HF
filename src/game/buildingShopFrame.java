@@ -100,9 +100,9 @@ public class buildingShopFrame extends JFrame {
                 break;
             default:tmp = new baseBuilding(newBuilding.owner, mainFrame);
         }
-        for (int i = 0; i < Game.getGameFileds().length; i++){
-            if(Game.getGameFileds()[i] == newBuilding){
-                Game.getGameFileds()[i] = tmp;
+        for (int i = 0; i < Game.gamefields.length; i++){
+            if(Game.gamefields[i] == newBuilding){
+                Game.gamefields[i] = tmp;
                 Game.refresh();
             }
         }

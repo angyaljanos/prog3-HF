@@ -16,6 +16,7 @@ public abstract class Consumer extends baseBuilding {
     public Consumer(String path,Player player,MainFrame mainFrame) throws IOException {
         super(path, player, mainFrame);
         addMouseListener(new mouseHandler(this));
+        coolDownMs = 4500;
     }
 
     @Override
@@ -31,7 +32,7 @@ public abstract class Consumer extends baseBuilding {
     @Override
     public String getBuildingName(){
 
-        return getName() + "Lv."+numberOfWorkers;
+        return getBaseName() + "Lv."+numberOfWorkers;
     }
 
     public void run() {

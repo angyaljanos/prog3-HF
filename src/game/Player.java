@@ -40,7 +40,7 @@ public class Player {
     }
 
     public void decraseGold(long gold) {
-        this.gold += gold;
+        this.gold -= gold;
     }
 
     public HashMap<String, Integer> getInventory() {

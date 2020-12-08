@@ -5,7 +5,7 @@ import game.Player;
 import hw.MainFrame;
 
 import java.io.IOException;
-import java.util.HashMap;
+
 
 public class sellerMarket extends Consumer{
     public sellerMarket(Player player, MainFrame mainFrame) throws IOException {
