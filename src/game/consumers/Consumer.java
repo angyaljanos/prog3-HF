@@ -8,7 +8,7 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 
 public abstract class Consumer extends baseBuilding {
-    protected String targetProduct = "";
+    protected String targetProduct = "None";
 
     public Consumer(String path,Player player,MainFrame mainFrame) throws IOException {
         super(path, player, mainFrame);

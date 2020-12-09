@@ -18,17 +18,20 @@ public class sellerPropertyWindow extends buildingPropertyWindow{
     private JButton sellButton = new JButton("Sell");
 
 
-
     public sellerPropertyWindow(baseBuilding building) {
         super(building);
 
         setUndecorated(false);
-        setSize(new Dimension(200, 150));
+        setSize(new Dimension(200, 200));
+
+        initList(building);
+
 
         upgradeButton.addActionListener(new upgradeConsumer(building));
         container.add(upgradeButton);
         sellButton.addActionListener(new sellConsumer(building));
         container.add(sellButton);
+
 
         addWindowListener(new WindowListener() {
             @Override
@@ -67,6 +70,15 @@ public class sellerPropertyWindow extends buildingPropertyWindow{
             }
         });
 
+    }
+
+    private void initList(baseBuilding building){
+        JComboBox productList = new JComboBox(building.getOwner().inventory.keySet().toArray(new String[0]));
+
+        JScrollPane listScroller = new JScrollPane(productList);
+
+
+        container.add(productList);
     }
 
     @Override
