@@ -18,11 +18,12 @@ public class Game {
 
     public Player player;
     private ingameMenuSlide menuSlide;
+    private long initGold = 10;
 
     public Game(MainFrame mainFrame) throws FileNotFoundException {
         setPrices();
         container = new JPanel();
-        player = new Player();
+        player = new Player(initGold);
         menuSlide = new ingameMenuSlide(mainFrame,this);
     }
 
@@ -35,22 +36,26 @@ public class Game {
         }
 
         mainFrame.mainPanel.add(container);
+        Game.refresh();
     }
 
-    public void newGame(MainFrame mainFrame){
-        try {
-            initPlayersInventory();
-            initTiles(mainFrame);
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-    }
     private void initPlayersInventory() throws FileNotFoundException {
         Gson gson =  new Gson();
         player.inventory = gson.fromJson( new FileReader(new File("").getAbsolutePath().concat("/resources/prices.json")), player.getInventory().getClass());
         for (String item: player.inventory.keySet()){
             player.inventory.put(item, 0);
+        }
+    }
+
+    public void newGame(MainFrame mainFrame){
+        try {
+            player.setGold(initGold);
+            mainFrame.mainPanel.removeAll();
+            initPlayersInventory();
+            initTiles(mainFrame);
+        }
+        catch(IOException e){
+            e.printStackTrace();
         }
     }
 

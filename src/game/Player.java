@@ -16,23 +16,8 @@ public class Player {
     public static final int capacityPerItem = 20;
     private long gold;
 
-    private LocalDateTime lastSaved;
-
-    public Player() throws FileNotFoundException {
-        gold = 10;
-    }
-
-    public void setCurrentDate(){
-        lastSaved = LocalDateTime.now();
-    }
-
-    public String getLastSavedDate(){
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        return lastSaved.format(dateFormatter);
-    }
-
-    public void setInventory(HashMap<String, Integer> inventory) {
-        this.inventory = inventory;
+    public Player(long initalGold){
+        gold = initalGold;
     }
 
     public void incrementGold(long gold) {
@@ -49,10 +34,6 @@ public class Player {
 
     public long getGold() {
         return gold;
-    }
-
-    public LocalDateTime getLastSaved() {
-        return lastSaved;
     }
 
     public void setGold(long quantity) {
