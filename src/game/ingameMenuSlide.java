@@ -96,12 +96,13 @@ public class ingameMenuSlide {
 
     private class viewStorage implements ActionListener{
         private Player player;
+        private final listInventoryWindow listWindow = new listInventoryWindow();
         public viewStorage(Player player){
             this.player = player;
         }
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            listItemsWindow l = new listItemsWindow(player.getInventory());
+            listWindow.showInventory(player.inventory);
         }
     }
     private class sellInventory implements ActionListener{
@@ -113,10 +114,11 @@ public class ingameMenuSlide {
         }
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            for(String key : player.getInventory().keySet()){
-                int value = (int)player.getInventory().get(key) * (int)prices.get(key);
-                player.incrementGold(value);
+            int value = 0;
+            for(String key : player.inventory.keySet()){
+                value += (int)player.inventory.get(key) * (int)prices.get(key);
             }
+            player.incrementGold(value);
             refresh(player);
         }
     }

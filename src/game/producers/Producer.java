@@ -20,7 +20,7 @@ public abstract class Producer extends baseBuilding {
 
     public void produce(String productName) throws InterruptedException {
         while(true) {
-            Integer currentQuantity = (Integer) owner.getInventory().get(productName);
+            Integer currentQuantity = (Integer) owner.inventory.get(productName);
             if (currentQuantity > Player.capacityPerItem)
                 Thread.currentThread().wait();
             else {
@@ -28,7 +28,7 @@ public abstract class Producer extends baseBuilding {
                     if (newQuantity > Player.capacityPerItem)
                         newQuantity = Player.capacityPerItem;
 
-                owner.getInventory().put(productName, newQuantity);
+                owner.inventory.put(productName, newQuantity);
             }
         }
     }

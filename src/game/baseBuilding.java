@@ -81,6 +81,10 @@ public class baseBuilding extends JPanel implements Runnable{
 
     protected baseBuilding getBuilding(){return this;}
 
+    public void start(){
+        thread.start();
+    }
+
     public Player getOwner() {
         return owner;
     }

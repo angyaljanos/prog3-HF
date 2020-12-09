@@ -147,6 +147,7 @@ public class buildingShopFrame extends JFrame {
                 Game.refresh();
             }
         }
+        tmp.start();
     }
 
     private class getBuildingNameListener implements ActionListener{

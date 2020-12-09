@@ -12,13 +12,13 @@ import java.util.HashMap;
 public class Game {
     public static HashMap<String,Integer> prices = new HashMap<>();
     private static JPanel container;
-    public static baseBuilding[] gamefields = new baseBuilding[16];;
+    public static baseBuilding[] gamefields = new baseBuilding[16];
 
     private static GridLayout grid = new GridLayout(4,4);
 
     public Player player;
     private ingameMenuSlide menuSlide;
-    private long initGold = 10;
+    private final long initGold = 10;
 
     public Game(MainFrame mainFrame) throws FileNotFoundException {
         setPrices();
@@ -39,19 +39,13 @@ public class Game {
         Game.refresh();
     }
 
-    private void initPlayersInventory() throws FileNotFoundException {
-        Gson gson =  new Gson();
-        player.inventory = gson.fromJson( new FileReader(new File("").getAbsolutePath().concat("/resources/prices.json")), player.getInventory().getClass());
-        for (String item: player.inventory.keySet()){
-            player.inventory.put(item, 0);
-        }
-    }
+
 
     public void newGame(MainFrame mainFrame){
         try {
             player.setGold(initGold);
             mainFrame.mainPanel.removeAll();
-            initPlayersInventory();
+            player.initPlayersInventory();
             initTiles(mainFrame);
         }
         catch(IOException e){
@@ -62,12 +56,16 @@ public class Game {
     public void continuePreviousGame(MainFrame mainFrame){
         try {
             initTiles(mainFrame);
+            loadGame();
         }
         catch(IOException e){
             e.printStackTrace();
         }
     }
 
+    public void loadGame(){
+
+    }
 
     public  void setPrices() throws FileNotFoundException {
         prices.clear();

@@ -13,8 +13,8 @@ public abstract class secondaryProducer extends Producer {
     }
 
     public void produce(String resourceMaterial, String endProduct) throws InterruptedException {
-        Integer currentResource = owner.getInventory().get(resourceMaterial);
-        Integer currentEndProduct =  owner.getInventory().get(endProduct);
+        Integer currentResource = owner.inventory.get(resourceMaterial);
+        Integer currentEndProduct =  owner.inventory.get(endProduct);
 
         Integer newResource = currentResource - getQuantity();
         Integer newEndProduct = currentResource + getQuantity();
@@ -24,8 +24,8 @@ public abstract class secondaryProducer extends Producer {
             Thread.currentThread().wait();
         }
         else{
-            owner.getInventory().put(resourceMaterial,newResource);
-            owner.getInventory().put(endProduct,newEndProduct);
+            owner.inventory.put(resourceMaterial,newResource);
+            owner.inventory.put(endProduct,newEndProduct);
             notifyAll();
         }
     }

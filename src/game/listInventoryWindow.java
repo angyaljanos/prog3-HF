@@ -6,56 +6,49 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.HashMap;
 
-public class listItemsWindow extends JFrame {
+public class listInventoryWindow extends JFrame {
     private static boolean isOpen = false;
-    private HashMap<String,Integer> map;
     private JPanel container = new JPanel();
     private JScrollPane scrollPane = new JScrollPane(container);
 
-    public listItemsWindow(HashMap<String, Integer> map) {
+    public listInventoryWindow() {
         if(!isOpen) {
             setTitle("Inventory");
-            this.map = map;
-            startWindow();
+            initWindow();
         }
     }
-     public void startWindow(){
-
+     private void initWindow(){
         setResizable(false);
         setSize(new Dimension(200,100));
 
         addWindowListener(new exitListener());
-
         add(scrollPane);
-        addMapValuesToWindow();
-
-        setVisible(true);
-        isOpen = true;
     }
 
-    private void addMapValuesToWindow(){
+    private void addValues(HashMap<String,Integer> map){
         JPanel content = new JPanel();
         content.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
+        int lineCnt = 0;
+        for (String key : map.keySet()) {
+            constraints.fill = GridBagConstraints.HORIZONTAL;
+            constraints.gridy = lineCnt;
+            content.add(new Label(key), constraints);
+            content.add(new Label(String.valueOf(map.get(key))), constraints);
 
-        if(map.isEmpty()){
-            content.add(new JLabel("Your inventory is empty"));
-        }
-        else {
-            int lineCnt = 0;
-            for (String key : map.keySet()) {
-                constraints.fill = GridBagConstraints.HORIZONTAL;
-                constraints.gridy = lineCnt;
-                content.add(new Label(key), constraints);
-                content.add(new Label(String.valueOf(map.get(key))), constraints);
-
-                lineCnt++;
-            }
+            lineCnt++;
         }
         container.add(content);
     }
-    
-    
+
+    public void showInventory(HashMap<String,Integer> inventory){
+        container.removeAll();
+        addValues(inventory);
+        setVisible(true);
+        pack();
+        isOpen = true;
+    }
+
     private final class exitListener implements WindowListener{
 
         @Override

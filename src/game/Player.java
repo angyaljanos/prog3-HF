@@ -12,8 +12,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Player {
-    public HashMap<String,Integer> inventory = new HashMap<>();
     public static final int capacityPerItem = 20;
+    public HashMap<String,Integer> inventory = new HashMap<>();
     private long gold;
 
     public Player(long initalGold){
@@ -28,15 +28,20 @@ public class Player {
         this.gold -= gold;
     }
 
-    public HashMap<String, Integer> getInventory() {
-        return inventory;
-    }
-
     public long getGold() {
         return gold;
     }
 
     public void setGold(long quantity) {
         gold = quantity;
+    }
+
+    public void initPlayersInventory() throws FileNotFoundException {
+        Gson gson =  new Gson();
+        inventory = gson.fromJson( new FileReader(new File("").getAbsolutePath().concat("/resources/prices.json")), inventory.getClass());
+
+        for (String item: inventory.keySet()){
+            inventory.put(item, 0);
+        }
     }
 }
