@@ -29,6 +29,7 @@ public abstract class Producer extends baseBuilding {
                         newQuantity = Player.capacityPerItem;
 
                 owner.inventory.put(productName, newQuantity);
+                Thread.sleep(coolDownMs);
             }
         }
     }

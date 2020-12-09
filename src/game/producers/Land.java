@@ -15,7 +15,6 @@ public class Land extends Producer{
     public void run() {
         try {
             super.produce("Grains");
-            Thread.sleep(coolDownMs);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

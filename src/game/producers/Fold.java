@@ -16,7 +16,6 @@ public class Fold extends Producer{
         try {
             super.produce("Leather");
             super.produce("Meat");
-            Thread.sleep(coolDownMs);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

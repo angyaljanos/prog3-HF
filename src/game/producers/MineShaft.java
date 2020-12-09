@@ -15,7 +15,6 @@ public class MineShaft extends Producer{
     public void run() {
         try {
             super.produce("Iron Ore");
-            Thread.sleep(coolDownMs);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

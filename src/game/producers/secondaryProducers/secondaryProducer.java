@@ -27,6 +27,7 @@ public abstract class secondaryProducer extends Producer {
             owner.inventory.put(resourceMaterial,newResource);
             owner.inventory.put(endProduct,newEndProduct);
             notifyAll();
+            Thread.sleep(coolDownMs);
         }
     }
 }
