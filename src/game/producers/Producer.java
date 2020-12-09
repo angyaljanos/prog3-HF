@@ -50,15 +50,17 @@ public abstract class Producer extends baseBuilding {
     }
 
     protected class mouseHandler implements MouseListener {
-        buildingPropertyWindow propertyWindow;
+        buildingPropertyWindow hoverWindow;
+        producerPropertyWindow interactWindow;
 
         public mouseHandler(baseBuilding building){
-            propertyWindow = new buildingPropertyWindow(building);
+            hoverWindow = new buildingPropertyWindow(building);
+            interactWindow = new producerPropertyWindow(building);
         }
 
         @Override
         public void mouseClicked(MouseEvent mouseEvent) {
-            //addWorker();
+            interactWindow.showProperties();
         }
 
         @Override
@@ -73,12 +75,12 @@ public abstract class Producer extends baseBuilding {
 
         @Override
         public void mouseEntered(MouseEvent mouseEvent) {
-            propertyWindow.showProperties();
+            hoverWindow.showProperties();
         }
 
         @Override
         public void mouseExited(MouseEvent mouseEvent) {
-            propertyWindow.dispose();
+            hoverWindow.dispose();
         }
     }
 }

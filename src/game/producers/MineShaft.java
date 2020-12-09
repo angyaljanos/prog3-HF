@@ -7,7 +7,8 @@ import java.io.IOException;
 
 public class MineShaft extends Producer{
     public MineShaft(Player player, MainFrame mainFrame) throws IOException {
-        super("mineshaft.jpg", player, mainFrame);;
+        super("mineshaft.jpg", player, mainFrame);
+        cost = 3;
     }
 
     @Override

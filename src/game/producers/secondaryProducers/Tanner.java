@@ -8,6 +8,7 @@ import java.io.IOException;
 public class Tanner extends secondaryProducer {
     public Tanner(Player player,MainFrame mainFrame) throws IOException {
         super("tanner.jpg", player, mainFrame);
+        cost = 5;
     }
 
     @Override

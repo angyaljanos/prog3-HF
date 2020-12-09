@@ -8,6 +8,7 @@ import java.io.IOException;
 public class Fold extends Producer{
     public Fold(Player player, MainFrame mainFrame) throws IOException {
         super("fold.jpg", player, mainFrame);
+        cost = 2;
     }
 
     @Override

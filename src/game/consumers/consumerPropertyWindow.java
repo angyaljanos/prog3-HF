@@ -12,18 +12,22 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
 
-public class sellerPropertyWindow extends buildingPropertyWindow{
+public class consumerPropertyWindow extends buildingPropertyWindow{
 
-    private JButton upgradeButton = new JButton("Upgrade");
-    private JButton sellButton = new JButton("Sell");
+    private JButton upgradeButton ;
+    private JButton sellButton ;
     private  JComboBox productList;
 
-    public sellerPropertyWindow(baseBuilding building) {
+    public consumerPropertyWindow(baseBuilding building) {
         super(building);
+        upgradeButton = new JButton("Upgragde -" + building.getCost());
+        sellButton = new JButton("Sell +" + building.getCost());
 
         initFrame(building);
         String str = String.valueOf(productList.getSelectedItem());
         ((Consumer)building).setTargetProduct(str);
+
+        refreshButtonTexts(building);
 
         addWindowListener(new WindowListener() {
             @Override
@@ -61,7 +65,10 @@ public class sellerPropertyWindow extends buildingPropertyWindow{
 
             }
         });
-
+    }
+    private void refreshButtonTexts(baseBuilding building){
+        sellButton.setText("Upgragde -" + building.getCost());
+        sellButton.setText("Sell +" + building.getCost());
     }
 
     private void initFrame(baseBuilding building){
@@ -86,7 +93,7 @@ public class sellerPropertyWindow extends buildingPropertyWindow{
         super.showProperties();
     }
 
-    private static class upgradeConsumer implements ActionListener{
+    private class upgradeConsumer implements ActionListener{
         baseBuilding base;
         public  upgradeConsumer(baseBuilding baseBuilding){
             base = baseBuilding;
@@ -95,6 +102,7 @@ public class sellerPropertyWindow extends buildingPropertyWindow{
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             base.addWorker();
+            refreshButtonTexts(base);
         }
     }
     private class sellConsumer implements ActionListener{

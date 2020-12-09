@@ -8,6 +8,7 @@ import java.io.IOException;
 public class Quarry extends Producer{
     public Quarry(Player player, MainFrame mainFrame) throws IOException {
         super("quary.jpg", player, mainFrame);
+        cost = 1;
     }
 
     @Override

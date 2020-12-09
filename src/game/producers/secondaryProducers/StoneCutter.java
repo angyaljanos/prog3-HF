@@ -8,6 +8,7 @@ import java.io.IOException;
 public class StoneCutter extends secondaryProducer{
     public StoneCutter(Player player, MainFrame mainFrame) throws IOException {
         super("stonecutter.jpg", player, mainFrame);
+        cost = 4;
     }
 
     @Override
