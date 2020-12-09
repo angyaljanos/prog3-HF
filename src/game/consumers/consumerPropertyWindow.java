@@ -67,7 +67,7 @@ public class consumerPropertyWindow extends buildingPropertyWindow{
         });
     }
     private void refreshButtonTexts(baseBuilding building){
-        sellButton.setText("Upgragde -" + building.getCost());
+        upgradeButton.setText("Upgragde -" + building.getCost());
         sellButton.setText("Sell +" + building.getCost());
     }
 
