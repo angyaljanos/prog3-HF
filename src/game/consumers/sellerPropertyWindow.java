@@ -30,11 +30,13 @@ public class sellerPropertyWindow extends buildingPropertyWindow{
 
     }
 
-    public void showPoperties(){
+    @Override
+    public void showProperties(){
         isOpen = true;
         super.showProperties();
     }
-    private class upgradeConsumer implements ActionListener{
+
+    private static class upgradeConsumer implements ActionListener{
         baseBuilding base;
         public  upgradeConsumer(baseBuilding baseBuilding){
             base = baseBuilding;
