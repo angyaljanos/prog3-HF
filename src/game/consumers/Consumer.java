@@ -32,6 +32,7 @@ public abstract class Consumer extends baseBuilding {
         return getBaseName() + "Lv."+numberOfWorkers;
     }
 
+    @Override
     public void run() {
         try {
             sell();

@@ -16,7 +16,7 @@ public class sellerPropertyWindow extends buildingPropertyWindow{
 
     private JButton upgradeButton = new JButton("Upgrade");
     private JButton sellButton = new JButton("Sell");
-
+    private  JComboBox productList;
 
     public sellerPropertyWindow(baseBuilding building) {
         super(building);
@@ -24,14 +24,9 @@ public class sellerPropertyWindow extends buildingPropertyWindow{
         setUndecorated(false);
         setSize(new Dimension(200, 200));
 
-        initList(building);
-
-
-        upgradeButton.addActionListener(new upgradeConsumer(building));
-        container.add(upgradeButton);
-        sellButton.addActionListener(new sellConsumer(building));
-        container.add(sellButton);
-
+        initFrame(building);
+        String str = String.valueOf(productList.getSelectedItem());
+        ((Consumer)building).setTargetProduct(str);
 
         addWindowListener(new WindowListener() {
             @Override
@@ -72,12 +67,13 @@ public class sellerPropertyWindow extends buildingPropertyWindow{
 
     }
 
-    private void initList(baseBuilding building){
-        JComboBox productList = new JComboBox(building.getOwner().inventory.keySet().toArray(new String[0]));
+    private void initFrame(baseBuilding building){
+        productList = new JComboBox(building.getOwner().inventory.keySet().toArray(new String[0]));
 
-        JScrollPane listScroller = new JScrollPane(productList);
-
-
+        upgradeButton.addActionListener(new upgradeConsumer(building));
+        container.add(upgradeButton);
+        sellButton.addActionListener(new sellConsumer(building));
+        container.add(sellButton);
         container.add(productList);
     }
 
