@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Scanner;
@@ -25,13 +27,15 @@ public class buildingShopFrame extends JFrame {
     private baseBuilding newBuilding;
     private Player owner;
 
-    public buildingShopFrame(baseBuilding base) throws IOException {
+    public buildingShopFrame(baseBuilding base){
         super("Building Shop");
         newBuilding = base;
         owner = base.getOwner();
         getBuildingPrices();
         container.setLayout(grid);
         scrollPane = new JScrollPane(container);
+
+        baseBuilding.isWindowOpen = true;
 
         setSize(new Dimension(250,100));
 
@@ -40,9 +44,46 @@ public class buildingShopFrame extends JFrame {
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
         setResizable(false);
         setVisible(true);
+
+        addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent windowEvent) {
+
+            }
+
+            @Override
+            public void windowClosing(WindowEvent windowEvent) {
+                baseBuilding.isWindowOpen = false;
+            }
+
+            @Override
+            public void windowClosed(WindowEvent windowEvent) {
+
+            }
+
+            @Override
+            public void windowIconified(WindowEvent windowEvent) {
+
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent windowEvent) {
+
+            }
+
+            @Override
+            public void windowActivated(WindowEvent windowEvent) {
+
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent windowEvent) {
+
+            }
+        });
     }
 
-    private void getBuildingPrices() throws IOException {
+    private void getBuildingPrices() {
         Scanner sc = new Scanner(Objects.requireNonNull(baseBuilding.class.getClassLoader().getResourceAsStream("buildingPrices.txt")));
         while (sc.hasNext()){
             String[] line = sc.nextLine().split(":");
@@ -131,7 +172,7 @@ public class buildingShopFrame extends JFrame {
             }
             finally {
                 dispose();
-
+                baseBuilding.isWindowOpen = false;
             }
         }
     }

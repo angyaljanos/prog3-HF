@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class baseBuilding extends JPanel implements Runnable{
+    public static boolean isWindowOpen = false;
+
     protected BufferedImage image;
     protected int numberOfWorkers;
     protected long coolDownMs;
@@ -83,10 +85,6 @@ public class baseBuilding extends JPanel implements Runnable{
         return owner;
     }
 
-    public void paint(MainFrame mainFrame){
-        mainFrame.repaint();
-    }
-
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -107,11 +105,9 @@ public class baseBuilding extends JPanel implements Runnable{
 
         @Override
         public void mouseClicked(MouseEvent mouseEvent) {
-            try {
+            if(!isWindowOpen)
                 new buildingShopFrame(getBuilding());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
         }
 
         @Override

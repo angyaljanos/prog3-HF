@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.IOException;
 
 public class sellerPropertyWindow extends buildingPropertyWindow{
@@ -15,7 +17,7 @@ public class sellerPropertyWindow extends buildingPropertyWindow{
     private JButton upgradeButton = new JButton("Upgrade");
     private JButton sellButton = new JButton("Sell");
 
-    public static boolean isOpen = false;
+
 
     public sellerPropertyWindow(baseBuilding building) {
         super(building);
@@ -28,12 +30,48 @@ public class sellerPropertyWindow extends buildingPropertyWindow{
         sellButton.addActionListener(new sellConsumer(building));
         container.add(sellButton);
 
+        addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent windowEvent) {
+
+            }
+
+            @Override
+            public void windowClosing(WindowEvent windowEvent) {
+                baseBuilding.isWindowOpen = false;
+            }
+
+            @Override
+            public void windowClosed(WindowEvent windowEvent) {
+
+            }
+
+            @Override
+            public void windowIconified(WindowEvent windowEvent) {
+
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent windowEvent) {
+
+            }
+
+            @Override
+            public void windowActivated(WindowEvent windowEvent) {
+
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent windowEvent) {
+
+            }
+        });
+
     }
 
     @Override
     public void showProperties(){
         super.showProperties();
-        isOpen = true;
     }
 
     private static class upgradeConsumer implements ActionListener{
@@ -68,7 +106,7 @@ public class sellerPropertyWindow extends buildingPropertyWindow{
                 e.printStackTrace();
             }
             dispose();
-            isOpen = false;
+            baseBuilding.isWindowOpen = false;
         }
     }
 }

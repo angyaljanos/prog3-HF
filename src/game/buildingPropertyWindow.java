@@ -44,12 +44,11 @@ public class buildingPropertyWindow extends JFrame {
     }
 
     public void showProperties(){
-        if(!sellerPropertyWindow.isOpen) {
+        if(!baseBuilding.isWindowOpen) {
+
             setVisible(true);
             Point tmp = MouseInfo.getPointerInfo().getLocation();
-            Dimension dim = new Dimension(tmp.x, tmp.y);
-            this.setLocation(dim.width, dim.height);
-
+            this.setLocation(tmp.x, tmp.y);
         }
     }
 }
