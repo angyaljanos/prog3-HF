@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class buildingPropertyWindow extends JFrame {
-    public static  boolean isOpen = false;
+    public static boolean isOpen = false;
 
     protected JPanel container;
     protected JLabel nameLabel;
@@ -15,6 +15,7 @@ public class buildingPropertyWindow extends JFrame {
     protected GridLayout grid = new GridLayout(0,1);
 
     public buildingPropertyWindow(baseBuilding building){
+        setTitle(building.getBuildingName());
         setResizable(false);
         setSize(new Dimension(150,70));
         setUndecorated(true);
@@ -47,6 +48,8 @@ public class buildingPropertyWindow extends JFrame {
             Point tmp = MouseInfo.getPointerInfo().getLocation();
             Dimension dim = new Dimension(tmp.x, tmp.y);
             this.setLocation(dim.width, dim.height);
+
+            isOpen = true;
         }
     }
 }

@@ -1,17 +1,16 @@
 package game;
 
 import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
+import com.google.gson.reflect.TypeToken;
 import hw.MainFrame;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.*;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 
 public class Game {
-    public static HashMap prices = new HashMap<String,Integer>();
+    public static HashMap<String,Integer> prices = new HashMap<>();
     private static JPanel container;
     public static baseBuilding[] gamefields = new baseBuilding[16];;
 
@@ -64,10 +63,12 @@ public class Game {
         }
     }
 
-    public void setPrices() throws FileNotFoundException {
+
+    public  void setPrices() throws FileNotFoundException {
         prices.clear();
         Gson gson =  new Gson();
-        prices = gson.fromJson( new FileReader(new File("").getAbsolutePath().concat("/resources/prices.json")), prices.getClass());
+        final Type mapType = new TypeToken<HashMap<String, Integer>>(){}.getType();
+        prices = gson.fromJson( new FileReader(new File("").getAbsolutePath().concat("/resources/prices.json")), mapType);
         System.out.println("prices.size:" + prices.keySet().size());
     }
 

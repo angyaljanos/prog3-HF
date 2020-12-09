@@ -19,7 +19,7 @@ public class Player {
     private LocalDateTime lastSaved;
 
     public Player() throws FileNotFoundException {
-        gold = 3;
+        gold = 10;
     }
 
     public void setCurrentDate(){

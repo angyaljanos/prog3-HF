@@ -13,6 +13,7 @@ public class sellerMarket extends Consumer{
         numberOfWorkers = 1;
         coolDownMs = 3000;
         this.targetProduct = "";
+        cost = 2;
     }
 
     @Override

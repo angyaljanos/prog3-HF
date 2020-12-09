@@ -57,13 +57,23 @@ public class baseBuilding extends JPanel implements Runnable{
         return 0;
     }
 
-    protected void addWorker(){
+    public long getCost() {
+        return cost;
+    }
+
+    public MainFrame getMainFrame() {
+        return mainFrame;
+    }
+
+    public void addWorker(){
         if(owner.getGold() >= cost) {
             numberOfWorkers++;
             coolDownMs = 3000 / numberOfWorkers;
 
             owner.decraseGold(cost);
             cost *= 2;
+
+            ingameMenuSlide.refresh(owner);
         }
     }
 
@@ -122,6 +132,7 @@ public class baseBuilding extends JPanel implements Runnable{
         @Override
         public void mouseExited(MouseEvent mouseEvent) {
             propertyWindow.dispose();
+            buildingPropertyWindow.isOpen = false;
         }
     }
 }
