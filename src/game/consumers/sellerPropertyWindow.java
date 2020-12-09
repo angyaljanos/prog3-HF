@@ -21,7 +21,7 @@ public class sellerPropertyWindow extends buildingPropertyWindow{
         super(building);
 
         setUndecorated(false);
-        setSize(new Dimension(150, 150));
+        setSize(new Dimension(200, 150));
 
         upgradeButton.addActionListener(new upgradeConsumer(building));
         container.add(upgradeButton);
@@ -32,8 +32,8 @@ public class sellerPropertyWindow extends buildingPropertyWindow{
 
     @Override
     public void showProperties(){
-        isOpen = true;
         super.showProperties();
+        isOpen = true;
     }
 
     private static class upgradeConsumer implements ActionListener{
@@ -68,6 +68,7 @@ public class sellerPropertyWindow extends buildingPropertyWindow{
                 e.printStackTrace();
             }
             dispose();
+            isOpen = false;
         }
     }
 }

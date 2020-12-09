@@ -1,12 +1,13 @@
 package game;
 
+import game.consumers.sellerPropertyWindow;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class buildingPropertyWindow extends JFrame {
-    public static boolean isOpen = false;
 
     protected JPanel container;
     protected JLabel nameLabel;
@@ -43,13 +44,12 @@ public class buildingPropertyWindow extends JFrame {
     }
 
     public void showProperties(){
-        if(!isOpen) {
+        if(!sellerPropertyWindow.isOpen) {
             setVisible(true);
             Point tmp = MouseInfo.getPointerInfo().getLocation();
             Dimension dim = new Dimension(tmp.x, tmp.y);
             this.setLocation(dim.width, dim.height);
 
-            isOpen = true;
         }
     }
 }

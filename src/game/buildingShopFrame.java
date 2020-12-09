@@ -131,7 +131,7 @@ public class buildingShopFrame extends JFrame {
             }
             finally {
                 dispose();
-                buildingPropertyWindow.isOpen = false;
+
             }
         }
     }

@@ -132,7 +132,6 @@ public class baseBuilding extends JPanel implements Runnable{
         @Override
         public void mouseExited(MouseEvent mouseEvent) {
             propertyWindow.dispose();
-            buildingPropertyWindow.isOpen = false;
         }
     }
 }

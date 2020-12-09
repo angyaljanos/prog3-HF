@@ -90,7 +90,6 @@ public abstract class Consumer extends baseBuilding {
         @Override
         public void mouseExited(MouseEvent mouseEvent) {
             hoverWindow.dispose();
-            buildingPropertyWindow.isOpen = false;
         }
     }
 }
