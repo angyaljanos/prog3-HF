@@ -21,9 +21,6 @@ public class sellerPropertyWindow extends buildingPropertyWindow{
     public sellerPropertyWindow(baseBuilding building) {
         super(building);
 
-        setUndecorated(false);
-        setSize(new Dimension(200, 200));
-
         initFrame(building);
         String str = String.valueOf(productList.getSelectedItem());
         ((Consumer)building).setTargetProduct(str);
@@ -68,13 +65,20 @@ public class sellerPropertyWindow extends buildingPropertyWindow{
     }
 
     private void initFrame(baseBuilding building){
+        setUndecorated(false);
+        setTitle("Info");
+        setSize(new Dimension(220, 200));
+
         productList = new JComboBox(building.getOwner().inventory.keySet().toArray(new String[0]));
+        JPanel pane = new JPanel(new GridBagLayout());
+        pane.add(new JLabel("Choose:"));
+        pane.add(productList);
+        container.add(pane);
 
         upgradeButton.addActionListener(new upgradeConsumer(building));
         container.add(upgradeButton);
         sellButton.addActionListener(new sellConsumer(building));
         container.add(sellButton);
-        container.add(productList);
     }
 
     @Override
