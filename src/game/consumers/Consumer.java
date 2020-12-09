@@ -61,11 +61,11 @@ public abstract class Consumer extends baseBuilding {
 
     protected class mouseHandler implements MouseListener {
         buildingPropertyWindow hoverWindow;
-        sellerPropertyWindow interactWindow;
+        consumerPropertyWindow interactWindow;
 
         public mouseHandler(baseBuilding building){
             hoverWindow = new buildingPropertyWindow(building);
-            interactWindow = new sellerPropertyWindow(getBuilding());
+            interactWindow = new consumerPropertyWindow(getBuilding());
         }
 
         @Override

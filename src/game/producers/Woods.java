@@ -12,6 +12,11 @@ public class Woods extends Producer{
     }
 
     @Override
+    public long getCost(){
+        return cost;
+    }
+
+    @Override
     protected String getBaseName(){
         return "Woods";
     }
