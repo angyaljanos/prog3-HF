@@ -36,9 +36,8 @@ public abstract class Consumer extends baseBuilding {
     public void run() {
         try {
             sell();
-            notifyAll();
             Thread.sleep(coolDownMs);
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -52,6 +51,7 @@ public abstract class Consumer extends baseBuilding {
             else {
                 owner.inventory.put(targetProduct, Math.max(newQuantity, 0));
                 owner.incrementGold((long) newQuantity * (long) Game.prices.get(targetProduct));
+                notifyAll();
             }
             ingameMenuSlide.refresh(owner);
         }

@@ -50,7 +50,7 @@ public class GameTest {
         shop = new buildingShopFrame(Game.gamefields[0]);
         shop.setChoosedBuildingName("Woods");
         shop.addNew(mainFrame);
-        Thread.sleep(Game.gamefields[0].coolDownMs);
+        Thread.sleep(Game.gamefields[0].coolDownMs - 50);
 
         assertEquals("Number of workers bad",1,Game.gamefields[0].numberOfWorkers);
         assertEquals(Game.gamefields[0].getQuantity(),(long)game.player.inventory.get("Wood"));
