@@ -34,11 +34,13 @@ public abstract class Consumer extends baseBuilding {
 
     @Override
     public void run() {
-        try {
-            sell();
-            Thread.sleep(coolDownMs);
-        } catch (Exception e) {
-            e.printStackTrace();
+        while (true) {
+            try {
+                sell();
+                Thread.sleep(coolDownMs);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -46,13 +48,10 @@ public abstract class Consumer extends baseBuilding {
         if(owner.inventory.containsKey(targetProduct)) {
             Integer currentQuantity = owner.inventory.get(targetProduct);
             int newQuantity = currentQuantity - 1 - (numberOfWorkers / 5);
-            if (currentQuantity <= 0)
-                thread.wait();
-            else {
-                owner.inventory.put(targetProduct, Math.max(newQuantity, 0));
-                owner.incrementGold((long) newQuantity * (long) Game.prices.get(targetProduct));
-                notifyAll();
-            }
+
+            owner.inventory.put(targetProduct, Math.max(newQuantity, 0));
+            owner.incrementGold((long) newQuantity * (long) Game.prices.get(targetProduct));
+
             ingameMenuSlide.refresh(owner);
         }
     }
