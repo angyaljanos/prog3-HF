@@ -44,15 +44,17 @@ public abstract class Consumer extends baseBuilding {
     }
 
     protected void sell() throws InterruptedException {
-        Integer currentQuantity = owner.inventory.get(targetProduct);
-        Integer newQuantity = currentQuantity - 1 - (numberOfWorkers/5);
-        if(currentQuantity <= 0)
-            Thread.currentThread().wait();
-        else {
-            owner.inventory.put(targetProduct, newQuantity > 0 ? newQuantity : 0);
-            owner.incrementGold((long)newQuantity * (long)Game.prices.get(targetProduct));
+        if(owner.inventory.containsKey(targetProduct)) {
+            Integer currentQuantity = owner.inventory.get(targetProduct);
+            int newQuantity = currentQuantity - 1 - (numberOfWorkers / 5);
+            if (currentQuantity <= 0)
+                Thread.currentThread().wait();
+            else {
+                owner.inventory.put(targetProduct, Math.max(newQuantity, 0));
+                owner.incrementGold((long) newQuantity * (long) Game.prices.get(targetProduct));
+            }
+            ingameMenuSlide.refresh(owner);
         }
-        ingameMenuSlide.refresh(owner);
     }
     @Override
     public int getQuantity(){
