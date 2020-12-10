@@ -52,9 +52,8 @@ public class GameTest {
         shop.addNew(mainFrame);
         Thread.sleep(Game.gamefields[0].coolDownMs);
 
-        Woods woods = new Woods(game.player,mainFrame);
         assertEquals("Number of workers bad",1,Game.gamefields[0].numberOfWorkers);
-        assertEquals(woods.getQuantity(),(long)game.player.inventory.get("Wood"));
+        assertEquals(Game.gamefields[0].getQuantity(),(long)game.player.inventory.get("Wood"));
     }
     @Test
     public void upgradeBuilding() throws IOException {
@@ -75,7 +74,18 @@ public class GameTest {
         producerPropertyWindow.sellProducer  seller = new producerPropertyWindow(Game.gamefields[0]).createrSeller(Game.gamefields[0]);
 
         seller.sell();
-        assertEquals("Number of workers bad",game.getInitGold(),game.player.getGold());
+        assertEquals(11,game.player.getGold());
     }
+    @Test
+    public void testConsumer() throws IOException, InterruptedException {
+        game.newGame(mainFrame);
+        shop = new buildingShopFrame(Game.gamefields[0]);
+        shop.setChoosedBuildingName("Seller Market");
+        shop.addNew(mainFrame);
 
+        game.player.inventory.put("Wood",1);
+        Thread.sleep(Game.gamefields[0].getCoolDownMs());
+
+        assertEquals(0,(long)game.player.inventory.get("Wood"));
+    }
 }
