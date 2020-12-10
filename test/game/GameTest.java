@@ -4,6 +4,7 @@ import hw.MainFrame;
 import hw.game.Game;
 import hw.game.baseBuilding;
 import hw.game.buildingShopFrame;
+import hw.game.consumers.Consumer;
 import hw.game.producers.Woods;
 import hw.game.producers.producerPropertyWindow;
 import org.junit.Before;
@@ -86,10 +87,11 @@ public class GameTest {
         shop = new buildingShopFrame(Game.gamefields[0]);
         shop.setChoosedBuildingName("Seller Market");
         shop.addNew(mainFrame);
+        int initValue = 3;
+        game.player.inventory.put("Wood",3);
+        //(Consumer)(Game.gamefields[0]).setTargetProduct("Wood");
+        Thread.sleep(Game.gamefields[0].getCoolDownMs() + 50);
 
-        game.player.inventory.put("Wood",1);
-        Thread.sleep(Game.gamefields[0].getCoolDownMs());
-
-        assertEquals(0,(long)game.player.inventory.get("Wood"));
+        assertNotEquals(initValue,(long)game.player.inventory.get("Wood"));
     }
 }

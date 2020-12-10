@@ -13,7 +13,7 @@ public abstract class Consumer extends baseBuilding {
     public Consumer(String path, Player player, MainFrame mainFrame) throws IOException {
         super(path, player, mainFrame);
         addMouseListener(new mouseHandler(this));
-        coolDownMs = 4500;
+
     }
 
     @Override
@@ -50,7 +50,7 @@ public abstract class Consumer extends baseBuilding {
             int newQuantity = currentQuantity - 1 - (numberOfWorkers / 5);
 
             owner.inventory.put(targetProduct, Math.max(newQuantity, 0));
-            owner.incrementGold((long) newQuantity * (long) Game.prices.get(targetProduct));
+            owner.incrementGold((long) getQuantity() * (long) Game.prices.get(targetProduct));
 
             ingameMenuSlide.refresh(owner);
         }

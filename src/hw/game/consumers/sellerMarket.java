@@ -10,7 +10,7 @@ public class sellerMarket extends Consumer{
     public sellerMarket(Player player, MainFrame mainFrame) throws IOException {
         super("sellermarket.jpg", player , mainFrame);
         numberOfWorkers = 1;
-        coolDownMs = 3000;
+        coolDownMs = 5000;
         this.targetProduct = "";
         cost = 2;
     }
