@@ -114,7 +114,7 @@ public class baseBuilding extends JPanel implements Runnable{
         @Override
         public void mouseClicked(MouseEvent mouseEvent) {
             if(!isWindowOpen)
-                new buildingShopFrame(getBuilding());
+                (new buildingShopFrame(getBuilding())).showShop();
 
         }
 
