@@ -1,9 +1,9 @@
-package game;
+package hw.game;
 
-import game.consumers.sellerMarket;
-import game.producers.*;
-import game.producers.secondaryProducers.*;
+import hw.game.consumers.sellerMarket;
 import hw.MainFrame;
+import hw.game.producers.*;
+import hw.game.producers.secondaryProducers.*;
 
 import javax.swing.*;
 import java.awt.*;

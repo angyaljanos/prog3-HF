@@ -1,12 +1,12 @@
-package game.producers.secondaryProducers;
+package hw.game.producers.secondaryProducers;
 
-import game.Player;
+import hw.game.Player;
 import hw.MainFrame;
 
 import java.io.IOException;
 
 public class Tanner extends secondaryProducer {
-    public Tanner(Player player,MainFrame mainFrame) throws IOException {
+    public Tanner(Player player, MainFrame mainFrame) throws IOException {
         super("tanner.jpg", player, mainFrame);
         cost = 5;
     }

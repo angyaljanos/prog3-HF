@@ -1,6 +1,8 @@
 package hw;
 
-import game.*;
+
+import hw.game.Game;
+import hw.game.Player;
 
 import javax.swing.*;
 import java.awt.*;

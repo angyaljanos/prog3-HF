@@ -1,8 +1,8 @@
-package game.consumers;
+package hw.game.consumers;
 
-import game.*;
-import game.baseBuilding;
-import game.buildingPropertyWindow;
+
+import hw.game.*;
+import hw.game.baseBuilding;
 
 import javax.swing.*;
 import java.awt.*;

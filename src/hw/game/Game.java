@@ -1,4 +1,4 @@
-package game;
+package hw.game;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

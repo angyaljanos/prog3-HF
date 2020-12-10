@@ -1,7 +1,11 @@
 package game;
 
-import game.producers.*;
 import hw.MainFrame;
+import hw.game.Game;
+import hw.game.baseBuilding;
+import hw.game.buildingShopFrame;
+import hw.game.producers.Woods;
+import hw.game.producers.producerPropertyWindow;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -50,9 +54,9 @@ public class GameTest {
         shop = new buildingShopFrame(Game.gamefields[0]);
         shop.setChoosedBuildingName("Woods");
         shop.addNew(mainFrame);
-        Thread.sleep(Game.gamefields[0].coolDownMs - 50);
+        Thread.sleep(Game.gamefields[0].getCoolDownMs() - 50);
 
-        assertEquals("Number of workers bad",1,Game.gamefields[0].numberOfWorkers);
+        assertEquals("Number of workers bad",1,Game.gamefields[0].getNumberOfWorkers());
         assertEquals(Game.gamefields[0].getQuantity(),(long)game.player.inventory.get("Wood"));
     }
     @Test
@@ -63,7 +67,7 @@ public class GameTest {
         shop.addNew(mainFrame);
         Game.gamefields[0].addWorker();
 
-        assertEquals("Number of workers bad",2,Game.gamefields[0].numberOfWorkers);
+        assertEquals("Number of workers bad",2,Game.gamefields[0].getNumberOfWorkers());
     }
     @Test
     public void sellBuilding() throws IOException {

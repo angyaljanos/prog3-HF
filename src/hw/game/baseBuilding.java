@@ -1,4 +1,4 @@
-package game;
+package hw.game;
 
 import hw.MainFrame;
 
@@ -61,6 +61,10 @@ public class baseBuilding extends JPanel implements Runnable{
 
     public long getCost() {
         return cost;
+    }
+
+    public int getNumberOfWorkers() {
+        return numberOfWorkers;
     }
 
     public MainFrame getMainFrame() {

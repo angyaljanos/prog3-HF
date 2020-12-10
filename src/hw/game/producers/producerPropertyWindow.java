@@ -1,9 +1,9 @@
-package game.producers;
+package hw.game.producers;
 
-import game.Game;
-import game.baseBuilding;
-import game.buildingPropertyWindow;
-import game.ingameMenuSlide;
+import hw.game.Game;
+import hw.game.baseBuilding;
+import hw.game.buildingPropertyWindow;
+import hw.game.ingameMenuSlide;
 
 import javax.swing.*;
 import java.awt.*;

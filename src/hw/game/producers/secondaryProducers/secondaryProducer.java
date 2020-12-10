@@ -1,14 +1,14 @@
-package game.producers.secondaryProducers;
+package hw.game.producers.secondaryProducers;
 
-import game.Player;
-import game.producers.Producer;
+import hw.game.Player;
+import hw.game.producers.Producer;
 import hw.MainFrame;
 
 import java.io.IOException;
 
 public abstract class secondaryProducer extends Producer {
 
-    public secondaryProducer(String path,Player player, MainFrame mainFrame) throws IOException {
+    public secondaryProducer(String path, Player player, MainFrame mainFrame) throws IOException {
         super(path, player, mainFrame);
     }
 

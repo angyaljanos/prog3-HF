@@ -1,7 +1,6 @@
-package game.consumers;
+package hw.game.consumers;
 
-import game.Game;
-import game.Player;
+import hw.game.Player;
 import hw.MainFrame;
 
 import java.io.IOException;

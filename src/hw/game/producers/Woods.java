@@ -1,6 +1,6 @@
-package game.producers;
+package hw.game.producers;
 
-import game.Player;
+import hw.game.Player;
 import hw.MainFrame;
 
 import java.io.IOException;

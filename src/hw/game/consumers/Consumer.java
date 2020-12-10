@@ -1,7 +1,7 @@
-package game.consumers;
+package hw.game.consumers;
 
-import game.*;
 import hw.*;
+import hw.game.*;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -10,7 +10,7 @@ import java.io.IOException;
 public abstract class Consumer extends baseBuilding {
     protected String targetProduct = "None";
 
-    public Consumer(String path,Player player,MainFrame mainFrame) throws IOException {
+    public Consumer(String path, Player player, MainFrame mainFrame) throws IOException {
         super(path, player, mainFrame);
         addMouseListener(new mouseHandler(this));
         coolDownMs = 4500;

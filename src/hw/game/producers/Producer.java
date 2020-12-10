@@ -1,8 +1,8 @@
-package game.producers;
+package hw.game.producers;
 
-import game.Player;
-import game.baseBuilding;
-import game.buildingPropertyWindow;
+import hw.game.Player;
+import hw.game.baseBuilding;
+import hw.game.buildingPropertyWindow;
 import hw.MainFrame;
 
 import java.awt.event.MouseEvent;
