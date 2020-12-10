@@ -24,8 +24,7 @@ public class consumerPropertyWindow extends buildingPropertyWindow{
         sellButton = new JButton("Sell +" + building.getCost());
 
         initFrame(building);
-        String str = String.valueOf(productList.getSelectedItem());
-        ((Consumer)building).setTargetProduct(str);
+
 
         refreshButtonTexts(building);
 
@@ -38,6 +37,8 @@ public class consumerPropertyWindow extends buildingPropertyWindow{
             @Override
             public void windowClosing(WindowEvent windowEvent) {
                 baseBuilding.isWindowOpen = false;
+                String str = String.valueOf(productList.getSelectedItem());
+                ((Consumer)building).setTargetProduct(str);
             }
 
             @Override
