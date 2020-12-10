@@ -39,8 +39,6 @@ public class Game {
         Game.refresh();
     }
 
-
-
     public void newGame(MainFrame mainFrame){
         try {
             player.setGold(initGold);
@@ -67,12 +65,15 @@ public class Game {
 
     }
 
+    public long getInitGold() {
+        return initGold;
+    }
+
     public  void setPrices() throws FileNotFoundException {
         prices.clear();
         Gson gson =  new Gson();
         final Type mapType = new TypeToken<HashMap<String, Integer>>(){}.getType();
         prices = gson.fromJson( new FileReader(new File("").getAbsolutePath().concat("/resources/prices.json")), mapType);
-        System.out.println("prices.size:" + prices.keySet().size());
     }
 
     public void save() throws IOException {

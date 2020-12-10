@@ -12,7 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Player {
-    public static final int capacityPerItem = 20;
+    public static final int capacityPerItem = 50;
     public HashMap<String,Integer> inventory = new HashMap<>();
     private long gold;
 

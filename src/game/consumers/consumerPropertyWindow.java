@@ -105,7 +105,7 @@ public class consumerPropertyWindow extends buildingPropertyWindow{
             refreshButtonTexts(base);
         }
     }
-    private class sellConsumer implements ActionListener{
+    public class sellConsumer implements ActionListener{
         baseBuilding base;
         public  sellConsumer(baseBuilding baseBuilding){
             base = baseBuilding;

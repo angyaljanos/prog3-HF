@@ -47,6 +47,10 @@ public class listInventoryWindow extends JFrame {
         setVisible(true);
         pack();
         isOpen = true;
+
+        (new Timer(20, actionEvent -> {
+            addValues(inventory);
+        })).start();
     }
 
     private final class exitListener implements WindowListener{

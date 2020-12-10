@@ -83,6 +83,10 @@ public class buildingShopFrame extends JFrame {
         });
     }
 
+    public void setChoosedBuildingName(String choosedBuildingName) {
+        this.choosedBuildingName = choosedBuildingName;
+    }
+
     private void getBuildingPrices() {
         Scanner sc = new Scanner(Objects.requireNonNull(baseBuilding.class.getClassLoader().getResourceAsStream("buildingPrices.txt")));
         while (sc.hasNext()){

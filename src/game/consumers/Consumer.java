@@ -48,7 +48,7 @@ public abstract class Consumer extends baseBuilding {
             Integer currentQuantity = owner.inventory.get(targetProduct);
             int newQuantity = currentQuantity - 1 - (numberOfWorkers / 5);
             if (currentQuantity <= 0)
-                Thread.currentThread().wait();
+                thread.wait();
             else {
                 owner.inventory.put(targetProduct, Math.max(newQuantity, 0));
                 owner.incrementGold((long) newQuantity * (long) Game.prices.get(targetProduct));

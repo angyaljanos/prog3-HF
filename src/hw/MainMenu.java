@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
 
 public class MainMenu {
     private JPanel menuPanel = new JPanel();
-    private JLabel title = new JLabel("Welcome to Profucer-Cunsumer Game");
+    private JLabel title = new JLabel("Welcome to Producer-Consumer Game");
     private JButton continueButton = new JButton("Continue");
     private JButton newGameButton = new JButton("New Game");
     private JButton quitButton = new JButton("Exit");
