@@ -48,8 +48,10 @@ public class listInventoryWindow extends JFrame {
         pack();
         isOpen = true;
 
-        (new Timer(20, actionEvent -> {
+        (new Timer(500, actionEvent -> {
+            container.removeAll();
             addValues(inventory);
+            pack();
         })).start();
     }
 

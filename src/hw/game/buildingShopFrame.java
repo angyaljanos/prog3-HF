@@ -27,6 +27,10 @@ public class buildingShopFrame extends JFrame {
     private baseBuilding newBuilding;
     private Player owner;
 
+    public void showShop() {
+        setVisible(true);
+    }
+    
     public buildingShopFrame(baseBuilding base){
         super("Building Shop");
         newBuilding = base;
@@ -43,7 +47,6 @@ public class buildingShopFrame extends JFrame {
         setLocation(MouseInfo.getPointerInfo().getLocation());
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
         setResizable(false);
-        setVisible(true);
 
         addWindowListener(new WindowListener() {
             @Override
