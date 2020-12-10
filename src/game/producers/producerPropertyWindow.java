@@ -80,6 +80,10 @@ public class producerPropertyWindow extends buildingPropertyWindow {
         sellButton.setText("Sell +" + building.getCost());
     }
 
+    public sellProducer createrSeller(baseBuilding base){
+        return new sellProducer(base);
+    }
+
     @Override
     public void showProperties() {
         super.showProperties();
@@ -97,13 +101,16 @@ public class producerPropertyWindow extends buildingPropertyWindow {
                     base.addWorker();
         }
     }
-    private class sellProducer implements ActionListener{
+    public class sellProducer implements ActionListener{
         baseBuilding base;
         public sellProducer(baseBuilding baseBuilding){
                     base = baseBuilding;
                 }
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
+            sell();
+        }
+        public void sell(){
             try {
                 base.getOwner().incrementGold(base.getCost());
                 for (int i = 0; i < Game.gamefields.length; i++) {
