@@ -20,13 +20,10 @@ public class consumerPropertyWindow extends buildingPropertyWindow{
 
     public consumerPropertyWindow(baseBuilding building) {
         super(building);
-        upgradeButton = new JButton("Upgragde -" + building.getCost());
-        sellButton = new JButton("Sell +" + building.getCost());
+        upgradeButton = new JButton("Upgragde" );
+        sellButton = new JButton("Sell");
 
         initFrame(building);
-
-
-        refreshButtonTexts(building);
 
         addWindowListener(new WindowListener() {
             @Override
@@ -67,10 +64,6 @@ public class consumerPropertyWindow extends buildingPropertyWindow{
             }
         });
     }
-    private void refreshButtonTexts(baseBuilding building){
-        upgradeButton.setText("Upgragde -" + building.getCost());
-        sellButton.setText("Sell +" + building.getCost());
-    }
 
     private void initFrame(baseBuilding building){
         setUndecorated(false);
@@ -103,7 +96,6 @@ public class consumerPropertyWindow extends buildingPropertyWindow{
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             base.addWorker();
-            refreshButtonTexts(base);
         }
     }
     public class sellConsumer implements ActionListener{

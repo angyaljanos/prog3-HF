@@ -76,7 +76,7 @@ public class GameTest {
         shop = new buildingShopFrame(Game.gamefields[0]);
         shop.setChoosedBuildingName("Woods");
         shop.addNew(mainFrame);
-        producerPropertyWindow.sellProducer  seller = new producerPropertyWindow(Game.gamefields[0]).createrSeller(Game.gamefields[0]);
+        producerPropertyWindow.sellProducerListener seller = new producerPropertyWindow(Game.gamefields[0]).createrSellProducerListener(Game.gamefields[0]);
 
         seller.sell();
         assertEquals(11,game.player.getGold());

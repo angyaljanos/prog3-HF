@@ -20,8 +20,8 @@ public class producerPropertyWindow extends buildingPropertyWindow {
 
     public producerPropertyWindow(baseBuilding building) {
         super(building);
-        upgradeButton = new JButton("Upgragde -" + building.getCost());
-        sellButton = new JButton("Sell +" + building.getCost());
+        upgradeButton = new JButton("Upgragde");
+        sellButton = new JButton("Sell");
         initFrame(building);
 
         addWindowListener(new WindowListener() {
@@ -71,17 +71,12 @@ public class producerPropertyWindow extends buildingPropertyWindow {
 
         upgradeButton.addActionListener(new upgradeConsumer(building));
         container.add(upgradeButton);
-        sellButton.addActionListener(new sellProducer(building));
+        sellButton.addActionListener(new sellProducerListener(building));
         container.add(sellButton);
     }
 
-    private void refreshButtonTexts(baseBuilding building){
-        upgradeButton.setText("Upgragde -" + building.getCost());
-        sellButton.setText("Sell +" + building.getCost());
-    }
-
-    public sellProducer createrSeller(baseBuilding base){
-        return new sellProducer(base);
+    public sellProducerListener createrSellProducerListener(baseBuilding base){
+        return new sellProducerListener(base);
     }
 
     @Override
@@ -93,7 +88,6 @@ public class producerPropertyWindow extends buildingPropertyWindow {
         baseBuilding base;
         public  upgradeConsumer(baseBuilding baseBuilding){
             base = baseBuilding;
-            refreshButtonTexts(baseBuilding);
         }
 
         @Override
@@ -101,9 +95,9 @@ public class producerPropertyWindow extends buildingPropertyWindow {
                     base.addWorker();
         }
     }
-    public class sellProducer implements ActionListener{
+    public class sellProducerListener implements ActionListener{
         baseBuilding base;
-        public sellProducer(baseBuilding baseBuilding){
+        public sellProducerListener(baseBuilding baseBuilding){
                     base = baseBuilding;
                 }
         @Override

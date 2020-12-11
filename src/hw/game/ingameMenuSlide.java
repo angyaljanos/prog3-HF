@@ -23,7 +23,7 @@ public class ingameMenuSlide {
     private JMenuItem[] gameMenuItems = new JMenuItem[gameFunctions.length];
 
     public ingameMenuSlide(MainFrame mainFrame,Game game){
-        initializeGameMenu(game.player,game, mainFrame);
+        initializeGameMenu(game, mainFrame);
         initializeStorageMenu(game.player, Game.prices);
         initializeGoldMenu(game.player);
 
@@ -43,14 +43,14 @@ public class ingameMenuSlide {
         menuBar.add(storageMenu);
     }
 
-    public void initializeGameMenu(Player player,Game game,MainFrame mainFrame){
+    public void initializeGameMenu(Game game,MainFrame mainFrame){
         gameFunctionsMenu.setText("Game");
         for(int i = 0; i < gameFunctions.length; i++){
             gameMenuItems[i] = new JMenuItem(gameFunctions[i]);
             gameFunctionsMenu.add(gameMenuItems[i]);
         }
         gameMenuItems[0].addActionListener(new gameSaverListener(game));
-        gameMenuItems[1].addActionListener(new newGameListener(player,game,mainFrame));
+        gameMenuItems[1].addActionListener(new newGameListener(game,mainFrame));
         menuBar.add(gameFunctionsMenu);
     }
 
@@ -80,11 +80,9 @@ public class ingameMenuSlide {
         }
     }
     private class newGameListener implements ActionListener{
-        private Player player;
         private Game currentGame;
         private MainFrame mainFrame;
-        public newGameListener(Player player, Game game, MainFrame mainFrame){
-            this.player = player;
+        public newGameListener(Game game, MainFrame mainFrame){
             currentGame = game;
             this.mainFrame = mainFrame;
         }
@@ -120,42 +118,6 @@ public class ingameMenuSlide {
             }
             player.incrementGold(value);
             refresh(player);
-        }
-    }
-
-    private class hoverMouseListener implements MouseListener {
-        private Player player;
-        private viewGoldFrame goldFrame;
-
-        public hoverMouseListener(Player player) {
-            this.player = player;
-            this.goldFrame = new viewGoldFrame(player);
-        }
-
-        @Override
-        public void mouseClicked(MouseEvent mouseEvent) {
-
-        }
-
-        @Override
-        public void mousePressed(MouseEvent mouseEvent) {
-
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent mouseEvent) {
-
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent mouseEvent) {
-            goldFrame.update(player);
-            goldFrame.showFrame();
-        }
-
-        @Override
-        public void mouseExited(MouseEvent mouseEvent) {
-            goldFrame.dispose();
         }
     }
 

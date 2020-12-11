@@ -25,7 +25,6 @@ public class buildingShopFrame extends JFrame {
 
     private String choosedBuildingName = "None";
     private baseBuilding newBuilding;
-    private Player owner;
 
     public void showShop() {
         setVisible(true);
@@ -34,7 +33,6 @@ public class buildingShopFrame extends JFrame {
     public buildingShopFrame(baseBuilding base){
         super("Building Shop");
         newBuilding = base;
-        owner = base.getOwner();
         getBuildingPrices();
         container.setLayout(grid);
         scrollPane = new JScrollPane(container);
@@ -168,12 +166,12 @@ public class buildingShopFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             try {
-                if(owner.getGold() >= buildCost) {
-                    owner.decraseGold(buildCost);
+                if(newBuilding.getOwner().getGold() >= buildCost) {
+                    newBuilding.getOwner().decraseGold(buildCost);
                     choosedBuildingName = bname;
 
                     addNew(newBuilding.mainFrame);
-                    ingameMenuSlide.refresh(owner);
+                    ingameMenuSlide.refresh(newBuilding.getOwner());
                 }
             } catch (IOException e) {
                 e.printStackTrace();

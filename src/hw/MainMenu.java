@@ -55,11 +55,6 @@ public class MainMenu {
         mainFrame.mainPanel.add(menuPanel);
     }
 
-    public void removeMenuComponents(MainFrame mainFrame){
-        mainFrame.mainPanel.remove(menuPanel);
-        mainFrame.mainPanel.setBackground(Color.white);//refreshing the main panel
-    }
-
     private class newGameButtonListener implements ActionListener {
         private MainFrame mainFrame;
         private Player player;
@@ -72,7 +67,7 @@ public class MainMenu {
         }
         @Override
         public void actionPerformed(ActionEvent e) {
-            removeMenuComponents(mainFrame);
+            mainFrame.mainPanel.removeAll();
             game.newGame(mainFrame);
         }
 
@@ -86,7 +81,7 @@ public class MainMenu {
         @Override
         public void actionPerformed(ActionEvent e) {
             game.continuePreviousGame(mainFrame);
-            removeMenuComponents(mainFrame);
+            mainFrame.mainPanel.removeAll();
         }
     }
     private class exitButtonListener implements ActionListener {

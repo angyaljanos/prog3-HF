@@ -54,14 +54,21 @@ public class Game {
     public void continuePreviousGame(MainFrame mainFrame){
         try {
             initTiles(mainFrame);
-            loadGame();
+            loadGame(mainFrame);
         }
         catch(IOException e){
             e.printStackTrace();
         }
     }
 
-    public void loadGame(){
+    public void loadGame(MainFrame mainFrame) throws IOException {
+        Gson gson = new Gson();
+        Game game = new Game(mainFrame);
+        FileReader reader = new FileReader(new File("").getAbsolutePath().concat("/resources/game.json"));
+        game = gson.fromJson(reader,Game.class);
+        reader.close();
+
+        player = game.player;
 
     }
 

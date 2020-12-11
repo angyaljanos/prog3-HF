@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 
-public abstract class Producer extends baseBuilding {
+public abstract class   Producer extends baseBuilding {
 
     public Producer(String path, Player player, MainFrame mainFrame) throws IOException {
         super(path, player, mainFrame);
