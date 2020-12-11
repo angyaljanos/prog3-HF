@@ -89,7 +89,8 @@ public class GameTest {
         shop.addNew(mainFrame);
         int initValue = 3;
         game.player.inventory.put("Wood",3);
-        //(Consumer)(Game.gamefields[0]).setTargetProduct("Wood");
+        ((Consumer)Game.gamefields[0]).setTargetProduct("Wood");
+
         Thread.sleep(Game.gamefields[0].getCoolDownMs() + 50);
 
         assertNotEquals(initValue,(long)game.player.inventory.get("Wood"));

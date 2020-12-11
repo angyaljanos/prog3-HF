@@ -28,8 +28,6 @@ public class MainMenu {
     public void initComponents(MainFrame mainFrame){
         layout = new BoxLayout(menuPanel,BoxLayout.Y_AXIS);
 
-        menuPanel.setBackground(Color.CYAN);
-
         newGameButton.addActionListener(new newGameButtonListener(mainFrame));
         continueButton.addActionListener(new continueButtonListener(mainFrame));
         quitButton.addActionListener(new exitButtonListener(mainFrame));
