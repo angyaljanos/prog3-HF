@@ -8,6 +8,7 @@ import java.io.IOException;
 public class Land extends Producer{
     public Land(Player player, MainFrame mainFrame) throws IOException {
         super("land.jpg", player, mainFrame);
+        name = "Land";
         cost = 1;
     }
 

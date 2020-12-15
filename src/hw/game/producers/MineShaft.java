@@ -8,6 +8,7 @@ import java.io.IOException;
 public class MineShaft extends Producer{
     public MineShaft(Player player, MainFrame mainFrame) throws IOException {
         super("mineshaft.jpg", player, mainFrame);
+        name = "Mine Shaft";
         cost = 3;
     }
 

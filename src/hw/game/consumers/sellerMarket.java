@@ -9,6 +9,7 @@ import java.io.IOException;
 public class sellerMarket extends Consumer{
     public sellerMarket(Player player, MainFrame mainFrame) throws IOException {
         super("sellermarket.jpg", player , mainFrame);
+        name = "Seller Market";
         numberOfWorkers = 1;
         coolDownMs = 5000;
         this.targetProduct = "";

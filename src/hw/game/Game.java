@@ -68,8 +68,11 @@ public class Game {
     public void loadGame(MainFrame mainFrame) throws IOException {
         FileReader reader = new FileReader(new File("").getAbsolutePath().concat("/resources/game.json"));
 
+        JsonMaker.getDeserilializer().setPlayer(player);
+        JsonMaker.getDeserilializer().setMainFrame(mainFrame);
         toSave save = JsonMaker.getGson().fromJson(reader,toSave.class);
-        player = save.player;
+        player.setGold(save.player.getGold());
+        player.inventory = save.player.inventory;
         gamefields = save.buildings;
 
         reader.close();

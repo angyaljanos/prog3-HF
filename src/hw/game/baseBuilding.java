@@ -19,10 +19,11 @@ public class baseBuilding extends JPanel implements Runnable{
     protected BufferedImage image;
     @Expose
     protected int numberOfWorkers;
-    @Expose
     protected long coolDownMs;
     @Expose
     protected long cost;
+    @Expose
+    protected String name = "Field";
     protected Player owner;
     protected MainFrame mainFrame;
     protected Thread thread = new Thread(this);
@@ -52,7 +53,7 @@ public class baseBuilding extends JPanel implements Runnable{
     }
 
     public String getBuildingName(){
-        return "Field";
+        return name;
     }
 
     public long getCoolDownMs(){
@@ -65,6 +66,14 @@ public class baseBuilding extends JPanel implements Runnable{
 
     public long getCost() {
         return cost;
+    }
+
+    public void setCost(long cost) {
+        this.cost = cost;
+    }
+
+    public void setNumberOfWorkers(int numberOfWorkers) {
+        this.numberOfWorkers = numberOfWorkers;
     }
 
     public int getNumberOfWorkers() {

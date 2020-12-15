@@ -8,6 +8,7 @@ import java.io.IOException;
 public class Woods extends Producer{
     public Woods(Player player, MainFrame mainFrame) throws IOException {
         super("woods.jpg", player, mainFrame);
+        name = "Woods";
         cost = 1;
     }
 

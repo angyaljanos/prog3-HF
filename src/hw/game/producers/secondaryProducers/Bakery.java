@@ -8,6 +8,7 @@ import java.io.IOException;
 public class Bakery extends secondaryProducer {
     public Bakery(Player player, MainFrame mainFrame) throws IOException {
         super("bakery.jpg", player, mainFrame);
+        name = "Bakery";
         cost = 4;
     }
 
