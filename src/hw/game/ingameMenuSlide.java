@@ -4,8 +4,6 @@ import hw.MainFrame;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -38,7 +36,7 @@ public class ingameMenuSlide {
             storageMenuItems[i] = new JMenuItem(storageFunctions[i]);
             storageMenu.add(storageMenuItems[i]);
         }
-        storageMenuItems[0].addActionListener(new viewStorage(player));
+        storageMenuItems[0].addActionListener(new viewInvetory(player));
         storageMenuItems[1].addActionListener(new sellInventory(player,pricelist));
         menuBar.add(storageMenu);
     }
@@ -92,10 +90,10 @@ public class ingameMenuSlide {
         }
     }
 
-    private class viewStorage implements ActionListener{
+    private class viewInvetory implements ActionListener{
         private Player player;
         private final listInventoryWindow listWindow = new listInventoryWindow();
-        public viewStorage(Player player){
+        public viewInvetory(Player player){
             this.player = player;
         }
         @Override
@@ -115,6 +113,7 @@ public class ingameMenuSlide {
             int value = 0;
             for(String key : player.inventory.keySet()){
                 value += (int)player.inventory.get(key) * (int)prices.get(key);
+                player.inventory.put(key,0);
             }
             player.incrementGold(value);
             refresh(player);

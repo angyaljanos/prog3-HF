@@ -19,8 +19,7 @@ public class listInventoryWindow extends JFrame {
     }
      private void initWindow(){
         setResizable(false);
-        setSize(new Dimension(200,100));
-
+        setSize(new Dimension(180,300));
         addWindowListener(new exitListener());
         add(scrollPane);
     }
@@ -45,13 +44,12 @@ public class listInventoryWindow extends JFrame {
         container.removeAll();
         addValues(inventory);
         setVisible(true);
-        pack();
         isOpen = true;
 
         (new Timer(500, actionEvent -> {
             container.removeAll();
             addValues(inventory);
-            pack();
+            container.updateUI();
         })).start();
     }
 

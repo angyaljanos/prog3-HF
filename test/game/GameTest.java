@@ -47,7 +47,7 @@ public class GameTest {
         game.save();
 
         game.continuePreviousGame(mainFrame);
-        assertNotEquals(Game.gamefields[0].getClass(), Woods.class);
+        assertEquals(Game.gamefields[0].getClass(), Woods.class);
     }
     @Test
     public void produce() throws InterruptedException, IOException {

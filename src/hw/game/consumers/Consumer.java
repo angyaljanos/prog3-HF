@@ -45,8 +45,8 @@ public abstract class Consumer extends baseBuilding {
     }
 
     protected void sell() throws InterruptedException {
-        if(owner.inventory.containsKey(targetProduct)) {
-            Integer currentQuantity = owner.inventory.get(targetProduct);
+        Integer currentQuantity = owner.inventory.get(targetProduct);
+        if(owner.inventory.containsKey(targetProduct) && currentQuantity > 0) {
             int newQuantity = currentQuantity - 1 - (numberOfWorkers / 5);
 
             owner.inventory.put(targetProduct, Math.max(newQuantity, 0));
