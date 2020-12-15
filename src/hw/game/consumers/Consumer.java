@@ -34,7 +34,7 @@ public abstract class Consumer extends baseBuilding {
 
     @Override
     public void run() {
-        while (true) {
+        while (running) {
             try {
                 sell();
                 Thread.sleep(coolDownMs);

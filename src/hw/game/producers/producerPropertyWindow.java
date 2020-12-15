@@ -114,6 +114,7 @@ public class producerPropertyWindow extends buildingPropertyWindow {
                 }
                 Game.refresh();
                 ingameMenuSlide.refresh(base.getOwner());
+                base.stop();
             }
             catch (IOException e) {
                 e.printStackTrace();

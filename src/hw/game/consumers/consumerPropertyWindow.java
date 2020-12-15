@@ -112,6 +112,7 @@ public class consumerPropertyWindow extends buildingPropertyWindow{
                         Game.gamefields[i] = new baseBuilding(base.getOwner(), base.getMainFrame());
                     }
                 }
+                base.stop();
                 Game.refresh();
                 ingameMenuSlide.refresh(base.getOwner());
             }

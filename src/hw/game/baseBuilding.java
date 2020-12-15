@@ -27,6 +27,7 @@ public class baseBuilding extends JPanel implements Runnable{
     protected Player owner;
     protected MainFrame mainFrame;
     protected Thread thread = new Thread(this);
+    protected boolean running = true;
 
     public baseBuilding(String path, Player player, MainFrame mainFrame) throws IOException {
         image = ImageIO.read(Objects.requireNonNull(baseBuilding.class.getClassLoader().getResourceAsStream(path)));
@@ -100,6 +101,10 @@ public class baseBuilding extends JPanel implements Runnable{
 
     public void start(){
         thread.start();
+    }
+
+    public void stop(){
+        running = false;
     }
 
     public Player getOwner() {

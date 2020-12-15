@@ -44,6 +44,9 @@ public class Game {
 
     public void newGame(MainFrame mainFrame){
         try {
+            for (baseBuilding item:gamefields)
+                if(item!=null)
+                    item.stop();
             player.setGold(initGold);
             mainFrame.mainPanel.removeAll();
             player.initPlayersInventory();
@@ -52,6 +55,7 @@ public class Game {
         catch(IOException e){
             e.printStackTrace();
         }
+        ingameMenuSlide.refresh(player);
     }
 
     public void continuePreviousGame(MainFrame mainFrame){
