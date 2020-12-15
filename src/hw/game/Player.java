@@ -1,6 +1,7 @@
 package hw.game;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,7 +14,9 @@ import java.util.regex.Pattern;
 
 public class Player {
     public static final int capacityPerItem = 50;
+    @Expose
     public HashMap<String,Integer> inventory = new HashMap<>();
+    @Expose
     private long gold;
 
     public Player(long initalGold){

@@ -1,5 +1,6 @@
 package hw.game;
 
+import com.google.gson.annotations.Expose;
 import hw.MainFrame;
 
 import javax.imageio.ImageIO;
@@ -16,8 +17,11 @@ public class baseBuilding extends JPanel implements Runnable{
     public static boolean isWindowOpen = false;
 
     protected BufferedImage image;
+    @Expose
     protected int numberOfWorkers;
+    @Expose
     protected long coolDownMs;
+    @Expose
     protected long cost;
     protected Player owner;
     protected MainFrame mainFrame;

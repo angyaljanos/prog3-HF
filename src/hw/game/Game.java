@@ -1,7 +1,9 @@
 package hw.game;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
 import com.google.gson.reflect.TypeToken;
+import hw.JsonMaker;
 import hw.MainFrame;
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +14,7 @@ import java.util.HashMap;
 public class Game {
     public static HashMap<String,Integer> prices = new HashMap<>();
     private static JPanel container;
+
     public static baseBuilding[] gamefields = new baseBuilding[16];
 
     private static GridLayout grid = new GridLayout(4,4);
@@ -55,6 +58,7 @@ public class Game {
         try {
             initTiles(mainFrame);
             loadGame(mainFrame);
+            Game.refresh();
         }
         catch(IOException e){
             e.printStackTrace();
@@ -62,14 +66,13 @@ public class Game {
     }
 
     public void loadGame(MainFrame mainFrame) throws IOException {
-        Gson gson = new Gson();
-        Game game = new Game(mainFrame);
         FileReader reader = new FileReader(new File("").getAbsolutePath().concat("/resources/game.json"));
-        game = gson.fromJson(reader,Game.class);
+
+        toSave save = JsonMaker.getGson().fromJson(reader,toSave.class);
+        player = save.player;
+        gamefields = save.buildings;
+
         reader.close();
-
-        player = game.player;
-
     }
 
     public long getInitGold() {
@@ -84,9 +87,10 @@ public class Game {
     }
 
     public void save() throws IOException {
-        Gson gson = new Gson();
+        toSave save = new toSave(player,gamefields);
         FileWriter fileWriter = new FileWriter(new File("").getAbsolutePath().concat("/resources/game.json"));
-        gson.toJson(player, fileWriter);
+        JsonMaker.getGson().toJson(save, fileWriter);
+
 
         fileWriter.close();
     }
@@ -98,6 +102,18 @@ public class Game {
         }
         container.updateUI();
 
+    }
+
+    private  static class toSave{
+        @Expose
+        public Player player;
+        @Expose
+        public baseBuilding[] buildings;
+
+        public toSave(Player player,baseBuilding[] buildings){
+            this.buildings = buildings;
+            this.player = player;
+        }
     }
 
 }
