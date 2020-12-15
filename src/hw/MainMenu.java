@@ -67,7 +67,6 @@ public class MainMenu {
         }
         @Override
         public void actionPerformed(ActionEvent e) {
-            mainFrame.mainPanel.removeAll();
             game.newGame(mainFrame);
         }
 
@@ -81,7 +80,6 @@ public class MainMenu {
         @Override
         public void actionPerformed(ActionEvent e) {
             game.continuePreviousGame(mainFrame);
-            mainFrame.mainPanel.removeAll();
         }
     }
     private class exitButtonListener implements ActionListener {

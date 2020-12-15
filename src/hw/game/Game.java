@@ -56,8 +56,13 @@ public class Game {
 
     public void continuePreviousGame(MainFrame mainFrame){
         try {
-            initTiles(mainFrame);
+
+            container.setLayout(grid);
+
             loadGame(mainFrame);
+            mainFrame.mainPanel.removeAll();
+            mainFrame.mainPanel.add(container);
+            menuSlide.setVisible(true);
             Game.refresh();
         }
         catch(IOException e){
@@ -74,6 +79,8 @@ public class Game {
         player.setGold(save.player.getGold());
         player.inventory = save.player.inventory;
         gamefields = save.buildings;
+
+        menuSlide = new ingameMenuSlide(mainFrame,this);
 
         reader.close();
     }
